@@ -14,7 +14,7 @@ function InputTextArea({ control, fieldName, isRequire = true, error, validatePa
                     <textarea
                         onBlur={onBlur}
                         onChange={onChange}
-                        checked={value}
+                        value={value || ""}
                         type="text"
                         id={fieldName}
                     />

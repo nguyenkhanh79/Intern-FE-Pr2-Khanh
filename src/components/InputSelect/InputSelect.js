@@ -13,6 +13,7 @@ function InputSelect({
     onChangeField,
     error,
     isRequire = true,
+    special = false,
 }) {
     const { t } = useTranslation();
     return (
@@ -48,14 +49,23 @@ function InputSelect({
                             }}
                             loading={isFetching}
                         >
-                            {data.map((item, index) => (
-                                <Option
-                                    value={item[`${fieldName}_id`]}
-                                    key={item[`${fieldName}_id`]}
-                                >
-                                    {item[`${fieldName}_name`]}
-                                </Option>
-                            ))}
+                            {data.map((item, index) => {
+                                if (!special) {
+                                    return (
+                                        <Option
+                                            value={item[`${fieldName}_id`]}
+                                            key={item[`${fieldName}_id`]}
+                                        >
+                                            {item[`${fieldName}_name`]}
+                                        </Option>
+                                    );
+                                }
+                                return (
+                                    <Option value={item.id} key={index}>
+                                        {item.title}
+                                    </Option>
+                                );
+                            })}
                         </Select>
                     )}
                 />

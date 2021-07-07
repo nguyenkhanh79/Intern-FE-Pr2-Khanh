@@ -9,10 +9,12 @@ function InputText({
     error,
     validatePattern,
     type = "text",
+    defaultValue,
 }) {
     const { t } = useTranslation();
     return (
         <div className="input-block">
+            <p>{defaultValue ? defaultValue : ""}</p>
             <label htmlFor={fieldName}>{t(fieldName)}</label>
             <Controller
                 name={fieldName}
@@ -21,7 +23,7 @@ function InputText({
                     <input
                         onBlur={onBlur}
                         onChange={onChange}
-                        checked={value}
+                        value={value || ""}
                         type={type}
                         id={fieldName}
                     />
