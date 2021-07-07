@@ -1,11 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import ProductItem from "../components/ProductItem";
 import { Link } from "react-router-dom";
 import { formatMoney } from "utils";
 import Pagination from "./Pagination";
 import Stars from "./../components/Stars";
-import ProductItem from "../components/ProductItem";
 
 function ProductsShow() {
     const { t } = useTranslation();

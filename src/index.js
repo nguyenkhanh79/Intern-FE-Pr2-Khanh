@@ -2,20 +2,25 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
-import store from "redux/store";
+import store, { persistor } from "redux/store";
 import App from "./App";
-import 'antd/dist/antd.css'; 
+import "antd/dist/antd.css";
+import "react-toastify/dist/ReactToastify.css";
 import "./i18n";
 import "assets/scss/_grobal.scss";
 import reportWebVitals from "./reportWebVitals";
+
+import { PersistGate } from "redux-persist/lib/integration/react";
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <Suspense fallback={<div>Loading... </div>}>
-                <Router>
-                    <App />
-                </Router>
+                <PersistGate loading={<div>Loading... </div>} persistor={persistor}>
+                    <Router>
+                        <App />
+                    </Router>
+                </PersistGate>
             </Suspense>
         </Provider>
     </React.StrictMode>,

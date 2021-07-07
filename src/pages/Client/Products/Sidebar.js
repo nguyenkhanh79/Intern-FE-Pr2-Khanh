@@ -90,9 +90,9 @@ function Sidebar({ data }) {
                 </ul>
                 <form action="/" className="price-range-form">
                     <label htmlFor="from-input">{t("from")}</label>
-                    <input type="text" id="from-input" className="text-input"/>
+                    <input type="text" id="from-input" className="text-input" />
                     <label htmlFor="to-input">{t("to")}</label>
-                    <input type="text" id="to-input" className="text-input"/>
+                    <input type="text" id="to-input" className="text-input" />
                     <button type="submit" className="btn search-btn">
                         {t("filter")}
                     </button>

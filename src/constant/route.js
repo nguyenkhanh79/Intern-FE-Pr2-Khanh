@@ -5,3 +5,5 @@ export const SIGN_UP_PATH = "/signup";
 export const PRODUCTS_PATH = "/products";
 export const BLOGS_PATH = "/blogs";
 export const CONTACT_PATH = "/contact";
+export const CART_PATH = "/cart";
+export const CHECKOUT_PATH = "/checkout";

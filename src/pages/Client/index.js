@@ -7,7 +7,9 @@ import Header from "./components/Header";
 import Products from "./Products";
 import ProdcutDetail from "./ProductDetail";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import { PRODUCTS_PATH } from "constant/route";
+
+import { PRODUCTS_PATH, CART_PATH } from "constant/route";
+import Cart from "./Cart";
 
 function Client() {
     const dispatch = useDispatch();
@@ -27,6 +29,9 @@ function Client() {
                     </Route>
                     <Route path={`${PRODUCTS_PATH}/:productId`}>
                         <ProdcutDetail></ProdcutDetail>
+                    </Route>
+                    <Route path={CART_PATH}>
+                        <Cart></Cart>
                     </Route>
                 </Switch>
             </main>
