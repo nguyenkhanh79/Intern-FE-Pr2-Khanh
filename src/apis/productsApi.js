@@ -4,7 +4,7 @@ async function get(productId) {
     try {
         const doc = await db.collection("products").doc(productId).get();
         if (doc.exists) {
-            return doc.data();
+            return { id: doc.id, ...doc.data() };
         } else {
             throw new Error("Không tìm thấy dữ liệu");
         }

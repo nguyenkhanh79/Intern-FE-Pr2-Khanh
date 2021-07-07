@@ -8,10 +8,12 @@ import Products from "./Products";
 import ProdcutDetail from "./ProductDetail";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { PRODUCTS_PATH, CART_PATH } from "constant/route";
+import { PRODUCTS_PATH, CART_PATH, CHECKOUT_PATH } from "constant/route";
 import Cart from "./Cart";
+import Checkout from "./Checkout";
 
 function Client() {
+    let { path, url } = useRouteMatch();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,6 +34,9 @@ function Client() {
                     </Route>
                     <Route path={CART_PATH}>
                         <Cart></Cart>
+                    </Route>
+                    <Route path={CHECKOUT_PATH}>
+                        <Checkout></Checkout>
                     </Route>
                 </Switch>
             </main>
