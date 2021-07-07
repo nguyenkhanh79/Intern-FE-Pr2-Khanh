@@ -1,3 +1,16 @@
 {
-    "hello": "Xin chào"
+    "home": "Trang chủ",
+    "products": "Sản phẩm",
+    "blogs": "Tin tức",
+    "contact": "Liên hệ",
+    "language": "Tiếng Việt",
+    "signin": "Đăng nhập",
+    "signup": "Đăng ký",
+    "term": "Điều khoản",
+    "policy": "Hoàn trả",
+    "accessibility": "Tiếp cận",
+    "privacy": "Riêng tư",
+    "pages": "Trang",
+    "policies": "Chính sách",
+    "our info": "Thông tin"
 }

@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductsRequest } from "redux/actions/productsAction";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 function Client() {
     const dispatch = useDispatch();
@@ -9,7 +11,12 @@ function Client() {
         dispatch(getProductsRequest());
     }, []);
 
-    return <div>Client</div>;
+    return (
+        <>
+            <Header></Header>
+            <Footer></Footer>
+        </>
+    );
 }
 
 export default Client;
