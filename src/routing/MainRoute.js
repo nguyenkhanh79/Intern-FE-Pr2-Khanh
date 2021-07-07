@@ -5,6 +5,7 @@ import Client from "pages/Client";
 import { ROOT_PATH, ADMIN_PATH, SIGN_IN_PATH, SIGN_UP_PATH } from "constant/route";
 import Signin from "pages/Authentication/Signin/Signin";
 import Signup from "pages/Authentication/Signup/Signup";
+import PrivateRoute from "./PrivateRoute";
 
 function MainRoute() {
     return (
@@ -15,9 +16,9 @@ function MainRoute() {
             <Route path={SIGN_UP_PATH}>
                 <Signup />
             </Route>
-            <Route path={ADMIN_PATH}>
+            <PrivateRoute path={ADMIN_PATH}>
                 <Admin></Admin>
-            </Route>
+            </PrivateRoute>
             <Route path={ROOT_PATH}>
                 <Client />
             </Route>

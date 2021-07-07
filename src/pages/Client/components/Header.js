@@ -1,14 +1,18 @@
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ROOT_PATH, PRODUCTS_PATH, BLOGS_PATH, CONTACT_PATH } from "constant/route";
+import { ROOT_PATH, PRODUCTS_PATH, BLOGS_PATH, CONTACT_PATH, SIGN_IN_PATH, SIGN_UP_PATH } from "constant/route";
 import "../scss/Header.scss";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Popover, Button } from "antd";
+import { signoutRequest } from "redux/actions/authAction";
 
 function Header() {
     const headerNav = useRef(null);
     const cartQuantity = useSelector((state) => state.cart.totalQuantity);
     const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const currentUser = useSelector((state) => state.auth.currentUser);
 
     const menuData = [
         { title: "home", url: ROOT_PATH },
@@ -21,6 +25,21 @@ function Header() {
         e.stopPropagation();
         e.currentTarget.classList.toggle("menu-active");
         headerNav.current.classList.toggle("header-nav--active");
+    }
+
+    function signout() {
+        dispatch(signoutRequest());
+    }
+
+    function popupContent() {
+        return (
+            <div className="popup-content">
+                <Link to="profile">{t("profile")}</Link>
+                <button type="button" className="signout-btn primary-btn" onClick={signout}>
+                    {t("signout")}
+                </button>
+            </div>
+        );
     }
 
     return (
@@ -53,20 +72,40 @@ function Header() {
                                 <li className="language-item">English</li>
                             </ul>
                         </div>
-                        <div className="option-auth">
-                            <div className="option-title">
-                                <Link to="/signin">
-                                    <i className="bx bxs-user"></i>
-                                    <span>{t("signin")}</span>
-                                </Link>
+                        {currentUser ? (
+                            <Popover placement="bottom" content={popupContent()} trigger="click">
+                                <div className="user">
+                                    <div className="user-profile">
+                                        <span className="user-name">{currentUser.name}</span>
+                                    </div>
+                                    <div className="user-avatar">
+                                        <img
+                                            src={
+                                                currentUser.photoURL
+                                                    ? currentUser.photoURL
+                                                    : "https://karateinthewoodlands.com/wp-content/uploads/2017/09/default-user-image.png"
+                                            }
+                                            alt={currentUser.name}
+                                        />
+                                    </div>
+                                </div>
+                            </Popover>
+                        ) : (
+                            <div className="option-auth">
+                                <div className="option-title">
+                                    <Link to={SIGN_IN_PATH}>
+                                        <i className="bx bxs-user"></i>
+                                        <span>{t("signin")}</span>
+                                    </Link>
+                                </div>
+                                <div className="option-title">
+                                    <Link to={SIGN_UP_PATH}>
+                                        <i className="bx bxs-user"></i>
+                                        <span>{t("signup")}</span>
+                                    </Link>
+                                </div>
                             </div>
-                            <div className="option-title">
-                                <Link to="/signup">
-                                    <i className="bx bxs-user"></i>
-                                    <span>{t("signup")}</span>
-                                </Link>
-                            </div>
-                        </div>
+                        )}
                     </div>
                 </div>
                 <div className="header__right">

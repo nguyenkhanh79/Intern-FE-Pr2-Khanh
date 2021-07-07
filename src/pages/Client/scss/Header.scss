@@ -21,7 +21,7 @@
         height: 3rem;
 
         @include lg {
-            bottom: -1.5rem
+            bottom: -1.5rem;
         }
     }
 
@@ -78,7 +78,7 @@
                         color: $white1;
                         padding: 1rem 2rem;
                         transition: 0.3s;
-                        border-radius: 50%;
+                        border-radius: 15rem;
                         @include lg {
                             flex-direction: column;
                             border-radius: 0;
@@ -97,6 +97,30 @@
                     & + .nav-item {
                         margin-left: 1rem;
                     }
+                }
+            }
+        }
+
+        .user {
+            @include flex-row;
+            cursor: pointer;
+
+            &-profile {
+                margin-right: .5rem;
+
+                .user-name {
+                    color: $white1;
+                    font-weight: 500;
+                    font-size: 1.6rem;
+                }
+            }
+
+            &-avatar {
+                width: 3rem;
+                height: 3rem;
+
+                img {
+                    border-radius: 50%
                 }
             }
         }
@@ -265,4 +289,24 @@
 .curve {
     position: relative;
     z-index: 1;
+}
+
+.popup-content {
+    @include flex-column;
+
+    a {
+        color: $green1;
+        font-weight: bold;
+        transition: 0.3s;
+
+        &:hover {
+            color: $orange1;
+        }
+    }
+
+    .signout-btn {
+        margin-top: 1rem;
+        font-size: 1.6rem;
+        padding: 0.5rem 2rem;
+    }
 }

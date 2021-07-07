@@ -1,19 +1,32 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import InputText from "../../../components/InputText/InputText";
-import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import BtnLoading from "components/Loading/BtnLoading";
 import { SIGN_UP_PATH } from "constant/route";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { signinRequest } from "redux/actions/authAction";
 import { emailRegex } from "utils";
+import InputText from "../../../components/InputText/InputText";
 
 function Signin() {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const authError = useSelector((state) => state.auth.error);
+    const isLoading = useSelector((state) => state.auth.isLoading);
+
     const {
         control,
         handleSubmit,
         setValue,
         formState: { errors },
     } = useForm({ mode: "onTouched" });
+
+    const onSubmit = ({ email, password }) => {
+        dispatch(signinRequest(email, password));
+    };
+
     return (
         <main className="main-content auth-main">
             <h1 className="logo">
@@ -21,7 +34,7 @@ function Signin() {
                 <span>Fresh</span>
             </h1>
             <div className="auth-content">
-                <form className="form">
+                <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="auth-title">{t("signin")}</h2>
                     <div className="row-block">
                         <InputText
@@ -39,8 +52,14 @@ function Signin() {
                             type="password"
                         />
                     </div>
+                    {authError && (
+                        <span className="error-message error-message--mb">
+                            {t(authError.message)}
+                        </span>
+                    )}
+
                     <button className={"primary-btn"} type="submit">
-                        {t("signin")}
+                        {isLoading ? <BtnLoading /> : t("signin")}
                     </button>
                     <p className="signin-text">
                         <span>{t("you not have an account")}</span>

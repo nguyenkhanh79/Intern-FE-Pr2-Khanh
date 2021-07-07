@@ -1,14 +1,22 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import InputText from "../../../components/InputText/InputText";
-import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { SIGN_IN_PATH, SIGN_UP_PATH } from "constant/route";
-import { emailRegex, nameRegex, passwordRegex, phoneNumberRegex, usernameRegex } from "utils";
 import InputSelect from "components/InputSelect/InputSelect";
+import BtnLoading from "components/Loading/BtnLoading";
+import { SIGN_IN_PATH } from "constant/route";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { signupRequest } from "redux/actions/authAction";
+import { emailRegex, nameRegex, passwordRegex, phoneNumberRegex } from "utils";
+import InputText from "../../../components/InputText/InputText";
 
 function Signin() {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const isLoading = useSelector((state) => state.auth.isLoading);
+    const authError = useSelector((state) => state.auth.error);
+
     const {
         control,
         handleSubmit,
@@ -27,6 +35,10 @@ function Signin() {
         },
     ];
 
+    const sendSignupRequest = (data) => {
+        dispatch(signupRequest(data));
+    };
+
     return (
         <main className="main-content auth-main">
             <h1 className="logo">
@@ -34,7 +46,7 @@ function Signin() {
                 <span>Fresh</span>
             </h1>
             <div className="auth-content">
-                <form className="form signup-form">
+                <form className="form signup-form" onSubmit={handleSubmit(sendSignupRequest)}>
                     <h2 className="auth-title">{t("signup")}</h2>
                     <div className="row-block">
                         <InputText
@@ -79,8 +91,13 @@ function Signin() {
                     <div className="row-block">
                         <InputText control={control} fieldName="address" error={errors.address} />
                     </div>
-                    <button className={"primary-btn"} type="submit">
-                        {t("signup")}
+                    {authError && (
+                        <span className="error-message error-message--mb">
+                            {t(authError.message)}
+                        </span>
+                    )}
+                    <button className={"primary-btn"} type="submit" disabled={isLoading}>
+                        {isLoading ? <BtnLoading /> : t("signup")}
                     </button>
                     <p className="signin-text">
                         <span>{t("you already have an account")}</span>

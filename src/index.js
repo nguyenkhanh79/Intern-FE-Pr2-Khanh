@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 import store, { persistor } from "redux/store";
 import App from "./App";
 import "antd/dist/antd.css";
@@ -11,13 +11,14 @@ import "assets/scss/_grobal.scss";
 import reportWebVitals from "./reportWebVitals";
 
 import { PersistGate } from "redux-persist/lib/integration/react";
+import history from "routing/history";
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <Suspense fallback={<div>Loading... </div>}>
                 <PersistGate loading={<div>Loading... </div>} persistor={persistor}>
-                    <Router>
+                    <Router history={history}>
                         <App />
                     </Router>
                 </PersistGate>

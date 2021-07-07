@@ -113,11 +113,16 @@ body {
             height: 15rem;
             resize: none;
         }
+    }
+}
 
-        .error-message {
-            font-size: 1.4rem;
-            color: $red;
-        }
+.error-message {
+    font-size: 1.4rem;
+    color: $red;
+
+    &--mb {
+        margin-bottom: 2rem;
+        display: block
     }
 }
 
