@@ -1,4 +1,4 @@
-function debounce(func, wait) {
+export function debounce(func, wait) {
     let timeout;
 
     return function () {
@@ -12,4 +12,8 @@ function debounce(func, wait) {
         clearTimeout(timeout);
         timeout = setTimeout(executeFunction, wait);
     };
+}
+
+export function formatMoney(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }

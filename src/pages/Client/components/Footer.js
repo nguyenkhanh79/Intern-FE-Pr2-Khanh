@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import "./scss/Footer.scss";
+import "../scss/Footer.scss";
 
 function Footer() {
     const { t } = useTranslation();
@@ -38,8 +38,7 @@ function Footer() {
                             </Link>
                         </div>
                         <p className="intro-description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla faucibus
-                            egestas elit.
+                            {t("footer description")} 
                         </p>
                         <ul className="social-network">
                             {socialNetworkData.map((item, index) => {
