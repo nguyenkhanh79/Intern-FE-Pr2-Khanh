@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { ROOT_PATH, PRODUCTS_PATH, BLOGS_PATH, CONTACT_PATH } from "constant/route";
 import "../scss/Header.scss";
 
 function Header() {
@@ -8,10 +9,10 @@ function Header() {
     const { t } = useTranslation();
 
     const menuData = [
-        { title: "home", url: "/" },
-        { title: "products", url: "/" },
-        { title: "blogs", url: "/" },
-        { title: "contact", url: "/" },
+        { title: "home", url: ROOT_PATH },
+        { title: "products", url: PRODUCTS_PATH },
+        { title: "blogs", url: BLOGS_PATH },
+        { title: "contact", url: CONTACT_PATH },
     ];
 
     function toggleMenu(e) {

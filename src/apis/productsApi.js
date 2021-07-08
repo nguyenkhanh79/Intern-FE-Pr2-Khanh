@@ -1,6 +1,19 @@
 import firebase, { db } from "firebase-config";
 
-async function get() {
+async function get(productId) {
+    try {
+        const doc = await db.collection("products").doc(productId).get();
+        if (doc.exists) {
+            return doc.data();
+        } else {
+            throw new Error("Không tìm thấy dữ liệu");
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function getAll() {
     try {
         const querySnapshot = await db.collection("products").get();
         let data = [];
@@ -28,6 +41,7 @@ async function create(productsData) {
 
 const productsApi = {
     get,
+    getAll,
     create,
 };
 
