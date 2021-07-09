@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import store from "redux/store";
 import App from "./App";
 import "./i18n";
-import "./index.scss";
+import "assets/scss/_grobal.scss";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(

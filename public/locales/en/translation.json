@@ -1,3 +1,16 @@
 {
-    "hello": "Hello"
+    "home": "Home",
+    "products": "Products",
+    "blogs": "Blogs",
+    "contact": "Contact",
+    "language": "English",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "term": "Term",
+    "policy": "Policy",
+    "accessibility": "Accessibility",
+    "privacy": "Privacy",
+    "pages": "Pages",
+    "policies": "Policies",
+    "our info": "Our info"
 }
