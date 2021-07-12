@@ -1,0 +1,250 @@
+@import "assets/scss/common";
+
+.products-container {
+    @include flex-row(flex-start, flex-start);
+    padding: 7rem 0;
+
+    @include md {
+        flex-direction: column;
+    }
+
+    .products-sidebar {
+        width: 27rem;
+
+        @include md {
+            width: 100%;
+        }
+
+        .hot-block {
+            @include md {
+                display: none;
+            }
+        }
+
+        .sidebar-block {
+            margin-bottom: 3rem;
+
+            .block-title {
+                font-size: 2.4rem;
+                color: $black2;
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+            }
+
+            .search-form {
+                @include flex-row(flex-start);
+
+                .search-btn {
+                    margin-left: 1rem;
+                }
+            }
+
+            .categories-list {
+                .categories-item {
+                    @include flex-row(flex-start);
+
+                    .categories-link {
+                        display: block;
+                        color: $black2;
+                        transition: 0.3s;
+                        font-weight: 500;
+                        width: 100%;
+
+                        span {
+                            margin-left: 1rem;
+                            font-size: 1.8rem;
+                            line-height: 2;
+                        }
+
+                        &:hover {
+                            color: $green1;
+                            transform: translateX(1rem);
+                        }
+                    }
+                }
+            }
+
+            .rating-list {
+                .rating-item {
+                    margin-bottom: 0.5rem;
+                    cursor: pointer;
+                    transition: 0.3s;
+
+                    &:hover {
+                        transform: translateX(1rem);
+                    }
+                }
+            }
+
+            .price-range-list {
+                li {
+                    margin-bottom: 0.5rem;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    color: $black2;
+
+                    &:hover {
+                        transform: translateX(1rem);
+                        color: $green1;
+                    }
+                    .sign {
+                        margin: 0 1rem;
+                        font-size: 2rem;
+                    }
+
+                    .money-unit {
+                        margin-left: 0.5rem;
+                    }
+                    span {
+                        font-size: 1.6rem;
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .price-range-form {
+                label {
+                    font-size: 1.6rem;
+                    font-weight: bold;
+                    color: $black2;
+                }
+
+                input {
+                    width: 6rem;
+                    margin: 0 1rem;
+                }
+
+                button {
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+
+    .products-show {
+        flex-grow: 1;
+        margin-left: 2rem;
+
+        @include md {
+            margin-left: 0;
+        }
+
+        &__header {
+            @include flex-row(flex-end);
+            margin-bottom: 1rem;
+
+            .header-right {
+                @include flex-row;
+                position: relative;
+
+                .sort-text {
+                    margin-right: 0.5rem;
+                    font-size: 1.6rem;
+                    font-weight: 500;
+                    color: $black2;
+                }
+
+                #sort-by {
+                    padding: 0.5rem 1rem;
+                    padding-right: 3rem;
+                    border-radius: 1.5rem;
+                    outline: none;
+                    -moz-appearance: none; /* Firefox */
+                    -webkit-appearance: none; /* Safari and Chrome */
+                    appearance: none;
+                    cursor: pointer;
+                }
+
+                i {
+                    @include absoluteCenter(y);
+                    right: 1rem;
+                }
+            }
+        }
+
+        &__body {
+            .products-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-gap: 1.5rem;
+
+                @include lg {
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+
+                @include sm {
+                    grid-template-columns: 1fr 1fr;
+                }
+
+                .product-item {
+                    @include flex-column(flex-start, flex-start);
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                    border-radius: 1.5rem;
+                    overflow: hidden;
+                    transition: 0.3s;
+
+                    &:hover {
+                        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+                    }
+
+                    &__bottom {
+                        @include flex-column(flex-start, flex-start);
+                        padding: 2rem;
+                        padding-top: 0;
+                        flex-grow: 1;
+                        width: 100%;
+
+                        @include lg {
+                            padding: 1rem;
+                        }
+
+                        .product-title {
+                            font-size: 2rem;
+                            font-weight: 500;
+                            color: $black2;
+                            transition: 0.3s;
+
+                            &:hover {
+                                color: $green1;
+                            }
+                        }
+
+                        .product-description {
+                            font-size: 1.4rem;
+                            line-height: 1.5;
+                            margin-top: 0.5rem;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2; /* number of lines to show */
+                            flex-grow: 1;
+                            -webkit-box-orient: vertical;
+                        }
+
+                        .product-foot {
+                            @include flex-row(space-between);
+                            width: 100%;
+                            margin-top: 2rem;
+
+                            .product-price {
+                                font-size: 1.8rem;
+                                color: $black2;
+                                font-weight: 500;
+
+                                span:last-child {
+                                    margin-left: 0.5rem;
+                                }
+                            }
+
+                            .btn {
+                                border-radius: 50%;
+                                width: 4rem;
+                                height: 4rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -11,7 +11,7 @@
         content: "";
         position: absolute;
         background-size: cover;
-        background-image: url("../../../../assets/images/curve.png");
+        background-image: url("./../../../assets/images/curve.png");
         width: 100%;
         height: 3rem;
         top: 0;
@@ -38,7 +38,7 @@
 
             .intro-description {
                 font-size: 1.2rem;
-                line-height: 1.2;
+                line-height: 1.5;
                 color: $white1;
                 margin-top: 1rem;
             }

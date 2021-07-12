@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import "./scss/Header.scss";
+import "../scss/Header.scss";
 
 function Header() {
     const headerNav = useRef(null);
