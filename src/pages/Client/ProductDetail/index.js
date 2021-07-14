@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
-import { formatMoney } from "utils";
-import Stars from "./../components/Stars";
-import Slider from "react-slick";
 import { Rate } from "antd";
-
-import "../scss/ProductDetail.scss";
-import ProductItem from "../components/ProductItem";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import Slider from "react-slick";
+import { addCart } from "redux/actions/cartAction";
 import { getOneProductRequest } from "redux/actions/productsAction";
+import { formatMoney } from "utils";
 import Loading from "../components/Loading";
+import ProductItem from "../components/ProductItem";
+import QuantityInput from "../components/QuantityInput";
+import "../scss/ProductDetail.scss";
+import Stars from "./../components/Stars";
 
 function ProductDetail() {
+    const history = useHistory();
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const data = useSelector((state) => state.products.data);
@@ -29,11 +31,10 @@ function ProductDetail() {
         dispatch(getOneProductRequest(productId));
     }, [dispatch, productId]);
 
-    const handleOnChangeQuantity = (value) => {
-        if (value <= 0) {
-            value = 1;
-        }
-        setQuantityValue(value);
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        dispatch(addCart(product, quantityValue));
+        history.push("/cart");
     };
 
     const settings = {
@@ -55,7 +56,7 @@ function ProductDetail() {
     const commentsDemoData = [
         {
             id: "basdc",
-            productId: product?.id,
+            productId: product.id,
             comments: [
                 {
                     userId: "dasdasd",
@@ -94,29 +95,16 @@ function ProductDetail() {
                             <span className="main-price">{formatMoney(product?.price) + " đ"}</span>
                             <span className="unit"> / {product?.unit}</span>
                         </div>
-                        <form action="#" className="product-quantity">
+                        <form
+                            action="#"
+                            className="product-quantity"
+                            onSubmit={(e) => handleOnSubmit(e)}
+                        >
                             <div className="form-top">
-                                <button
-                                    type="button"
-                                    className="decrease-btn"
-                                    onClick={() => handleOnChangeQuantity(quantityValue - 1)}
-                                >
-                                    -
-                                </button>
-                                <input
-                                    type="number"
-                                    name="product-quantity"
-                                    id="product-quantity"
-                                    value={quantityValue}
-                                    onChange={(e) => handleOnChangeQuantity(e.target.value)}
-                                />
-                                <button
-                                    type="button"
-                                    className="increase-btn"
-                                    onClick={() => handleOnChangeQuantity(quantityValue + 1)}
-                                >
-                                    +
-                                </button>
+                                <QuantityInput
+                                    quantity={quantityValue}
+                                    onChangeQuantity={setQuantityValue}
+                                ></QuantityInput>{" "}
                             </div>
                             <div className="form-bottom">
                                 <button type="submit">{t("buy now")}</button>

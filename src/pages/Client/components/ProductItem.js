@@ -1,11 +1,25 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Stars from "./../components/Stars";
+import { toast } from "react-toastify";
+import { addCart } from "redux/actions/cartAction";
 import { formatMoney } from "utils";
 import { PRODUCTS_PATH } from "constant/route";
 import "../scss/ProductItem.scss";
+import "../scss/ProductItem.scss";
+import Stars from "./../components/Stars";
 
 function ProductItem({ item }) {
+    const dispatch = useDispatch();
+    const state = useSelector((state) => state);
+    const { t } = useTranslation();
+
+    function handleOnCartClick(item) {
+        toast.success(t("add cart success"));
+        dispatch(addCart(item));
+    }
+
     return (
         <div className="product-item">
             <div className="product-item__top">
@@ -22,7 +36,11 @@ function ProductItem({ item }) {
                         <span>{formatMoney(item.price)}</span>
                         <span>đ</span>
                     </div>
-                    <button type="button" className="btn search-btn">
+                    <button
+                        type="button"
+                        className="btn search-btn"
+                        onClick={() => handleOnCartClick(item)}
+                    >
                         <i className="bx bxs-cart-alt"></i>
                     </button>
                 </div>

@@ -37,9 +37,7 @@ function Footer() {
                                 <span>Fresh</span>
                             </Link>
                         </div>
-                        <p className="intro-description">
-                            {t("footer description")} 
-                        </p>
+                        <p className="intro-description">{t("footer description")}</p>
                         <ul className="social-network">
                             {socialNetworkData.map((item, index) => {
                                 return (

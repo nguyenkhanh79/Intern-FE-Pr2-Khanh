@@ -3,9 +3,11 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROOT_PATH, PRODUCTS_PATH, BLOGS_PATH, CONTACT_PATH } from "constant/route";
 import "../scss/Header.scss";
+import { useSelector } from "react-redux";
 
 function Header() {
     const headerNav = useRef(null);
+    const cartQuantity = useSelector((state) => state.cart.totalQuantity);
     const { t } = useTranslation();
 
     const menuData = [
@@ -71,7 +73,7 @@ function Header() {
                     <div className="header-cart">
                         <Link to="/cart">
                             <i className="bx bxs-cart-alt"></i>
-                            <span>3</span>
+                            <span>{cartQuantity}</span>
                         </Link>
                     </div>
                     <div className="header-menu" onClick={(e) => toggleMenu(e)}>
