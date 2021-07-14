@@ -1,11 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { formatMoney } from "utils";
 import Pagination from "./Pagination";
+import Stars from "./../components/Stars";
+import ProductItem from "../components/ProductItem";
 
-function ProductsShow({ data }) {
+function ProductsShow() {
     const { t } = useTranslation();
+    const data = useSelector((state) => state.products.data);
 
     return (
         <section className="products-show">
@@ -23,25 +27,8 @@ function ProductsShow({ data }) {
             <div className="products-show__body">
                 <ul className="products-list">
                     {data.map((item, index) => (
-                        <li className="product-item">
-                            <div className="product-item__top">
-                                <img src={item.image} alt={item.name} />
-                            </div>
-                            <div className="product-item__bottom">
-                                <Link to="/product-detail" className="product-title">
-                                    {item.name}
-                                </Link>
-                                <p className="product-description">{item.description}</p>
-                                <div className="product-foot">
-                                    <div className="product-price">
-                                        <span>{formatMoney(item.price)}</span>
-                                        <span>VNĐ</span>
-                                    </div>
-                                    <button type="button" class="btn search-btn">
-                                        <i class="bx bxs-cart-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
+                        <li key={index}>
+                            <ProductItem item={item} />
                         </li>
                     ))}
                 </ul>

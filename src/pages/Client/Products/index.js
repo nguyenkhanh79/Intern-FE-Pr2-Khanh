@@ -67,6 +67,7 @@ function Products() {
             price: 12000,
         },
     ];
+
     return (
         <section className="products-container">
             <Sidebar data={productsData}></Sidebar>

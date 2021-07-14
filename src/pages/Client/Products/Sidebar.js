@@ -102,7 +102,7 @@ function Sidebar({ data }) {
                 <h3 className="block-title">{t("top products")}</h3>
                 <ul className="hot-products">
                     {data.map((item, index) => (
-                        <li className="hot-product-item">
+                        <li className="hot-product-item" key={index}>
                             <TinyProduct data={item}></TinyProduct>
                         </li>
                     ))}

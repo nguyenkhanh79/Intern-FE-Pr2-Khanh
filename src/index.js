@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import store from "redux/store";
 import App from "./App";
+import 'antd/dist/antd.css'; 
 import "./i18n";
 import "assets/scss/_grobal.scss";
 import reportWebVitals from "./reportWebVitals";
