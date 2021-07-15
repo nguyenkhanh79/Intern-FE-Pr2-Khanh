@@ -38,6 +38,9 @@ function Client() {
                     <Route path={CHECKOUT_PATH}>
                         <Checkout></Checkout>
                     </Route>
+                    <Route path="*">
+                        <div>404</div>
+                    </Route>
                 </Switch>
             </main>
             <Footer></Footer>

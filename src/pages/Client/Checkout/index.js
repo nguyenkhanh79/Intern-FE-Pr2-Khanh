@@ -8,8 +8,8 @@ import {
     getWardRequest,
 } from "redux/actions/addressAction";
 import { useForm, Controller } from "react-hook-form";
-import InputSelect from "./InputSelect";
-import InputText from "./InputText";
+import InputSelect from "components/InputSelect/InputSelect";
+import InputText from "components/InputText/InputText";
 import { nameRegex, emailRegex, phoneNumberRegex } from "utils/index";
 import InputTextArea from "./InputTextarea";
 import { formatMoney } from "utils";
