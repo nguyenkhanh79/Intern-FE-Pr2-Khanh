@@ -15,8 +15,8 @@ function* fetchCategories() {
     }
 }
 
-function* watchProductsRequest() {
+function* watchCategoriesRequest() {
     yield takeLatest(GET_CATEGORIES_REQUEST, fetchCategories);
 }
 
-export default watchProductsRequest;
+export default watchCategoriesRequest;

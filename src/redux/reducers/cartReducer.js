@@ -14,10 +14,10 @@ const cartReducer = (state = initialState, action) => {
             const index = preProducts.findIndex(({ data }) => {
                 return data.id === product.id;
             });
-
             if (index <= -1) {
                 return {
-                    totalPrice: state.totalPrice + parseFloat(product.price),
+                    totalPrice:
+                        state.totalPrice + parseFloat(product.price) * parseFloat(quantity || 1),
                     totalQuantity: state.totalQuantity + 1,
                     products: [
                         ...preProducts,
