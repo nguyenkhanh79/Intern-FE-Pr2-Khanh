@@ -2,7 +2,14 @@ import React from "react";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-function InputText({ control, fieldName, isRequire = true, error, validatePattern }) {
+function InputText({
+    control,
+    fieldName,
+    isRequire = true,
+    error,
+    validatePattern,
+    type = "text",
+}) {
     const { t } = useTranslation();
     return (
         <div className="input-block">
@@ -15,7 +22,7 @@ function InputText({ control, fieldName, isRequire = true, error, validatePatter
                         onBlur={onBlur}
                         onChange={onChange}
                         checked={value}
-                        type="text"
+                        type={type}
                         id={fieldName}
                     />
                 )}

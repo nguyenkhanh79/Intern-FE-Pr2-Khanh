@@ -7,3 +7,4 @@ export const BLOGS_PATH = "/blogs";
 export const CONTACT_PATH = "/contact";
 export const CART_PATH = "/cart";
 export const CHECKOUT_PATH = "/checkout";
+export const AUTH_PATH = "/auth";

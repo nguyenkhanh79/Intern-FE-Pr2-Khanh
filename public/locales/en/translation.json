@@ -75,5 +75,11 @@
     "total price": "Total",
     "payment on delivery": "Payment on delivery",
     "payment via card": "Payment via card (comming soon)",
-    "order": "Order"
+    "order": "Order",
+    "username": "Username",
+    "password": "Password",
+    "you already have an account": "You already have an account? ",
+    "you not have an account": "You not have an account? ",
+    "username error": "Username at least 8 character and cannot contain special characters",
+    "password error": "Password at least 8 character, one uppercase letter, one lowercase letter and one number"
 }

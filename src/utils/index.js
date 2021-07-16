@@ -1,5 +1,5 @@
 import * as antd from "antd";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export function debounce(func, wait) {
     let timeout;
@@ -21,7 +21,6 @@ export function formatMoney(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-
 export function confirmModal(title, content, onOk) {
     antd.Modal.confirm({
         title: title,
@@ -34,12 +33,13 @@ export function confirmModal(title, content, onOk) {
             style: { backgroundColor: "#0eb58e", borderColor: "#0eb58e" },
         },
         okText: "Xóa",
-        onOk: onOk
+        onOk: onOk,
     });
 }
 
-export const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-export const usernameRegex = /^[A-Za-z0-9]+$/;
-export const nameRegex = /[A-Za-zÀ-ȕ]/;
+export const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+export const usernameRegex = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+export const nameRegex = /^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/;
 export const phoneNumberRegex = /(09|01[2|6|8|9])+([0-9]{8})\b/g;
-export const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/g;
+export const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/g;

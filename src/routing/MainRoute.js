@@ -1,15 +1,19 @@
 import Admin from "pages/Admin";
-import Authentication from "pages/Authentication";
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Client from "pages/Client";
-import { ROOT_PATH, SIGN_IN_PATH, ADMIN_PATH } from "constant/route";
+import { ROOT_PATH, ADMIN_PATH, SIGN_IN_PATH, SIGN_UP_PATH } from "constant/route";
+import Signin from "pages/Authentication/Signin/Signin";
+import Signup from "pages/Authentication/Signup/Signup";
 
 function MainRoute() {
     return (
         <Switch>
             <Route path={SIGN_IN_PATH}>
-                <Authentication></Authentication>
+                <Signin />
+            </Route>
+            <Route path={SIGN_UP_PATH}>
+                <Signup />
             </Route>
             <Route path={ADMIN_PATH}>
                 <Admin></Admin>
