@@ -81,5 +81,10 @@
     "you already have an account": "You already have an account? ",
     "you not have an account": "You not have an account? ",
     "username error": "Username at least 8 character and cannot contain special characters",
-    "password error": "Password at least 8 character, one uppercase letter, one lowercase letter and one number"
+    "password error": "Password at least 8 character, one uppercase letter, one lowercase letter and one number",
+    "The email address is already in use by another account.": "The email address is already in use by another account",
+    "The password is invalid or the user does not have a password.": "Wrong password",
+    "There is no user record corresponding to this identifier. The user may have been deleted.": "Email does not exist",
+    "signout": "Sign out",
+    "profile": "Profile"
 }

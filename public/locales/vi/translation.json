@@ -81,5 +81,10 @@
     "you already have an account": "Bạn đã có tài khoản? ",
     "you not have an account": "Bạn chưa có tài khoản? ",
     "username error": "Tài khoản chứa ít nhất 8 kí tự và không chứa kí tự đặc biệt!",
-    "password error": "Mật khẩu chứa ít nhất 8 kí tự, bao gồm 1 chữ hoa, 1 chữ thường và 1 số"
+    "password error": "Mật khẩu chứa ít nhất 8 kí tự, bao gồm 1 chữ hoa, 1 chữ thường và 1 số",
+    "The email address is already in use by another account.": "Email đã tồn tại trên hệ thống",
+    "The password is invalid or the user does not have a password.": "Sai mật khẩu",
+    "There is no user record corresponding to this identifier. The user may have been deleted.": "Email không tồn tại trên hệ thống",
+    "signout": "Đăng xuất",
+    "profile": "Thông tin tài khoản"
 }

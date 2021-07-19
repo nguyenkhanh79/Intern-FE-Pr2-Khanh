@@ -1,11 +1,19 @@
-import React from 'react'
+import React from "react";
+import { useDispatch } from 'react-redux';
+import { signoutRequest } from './../../redux/actions/authAction';
 
 function Admin() {
+    const dispatch = useDispatch();
+
+    const signout = () => {
+        dispatch(signoutRequest())
+    };
+
     return (
         <div>
-            Admin
+            <button onClick={signout}>Signout</button>
         </div>
-    )
+    );
 }
 
-export default Admin
+export default Admin;
