@@ -10,6 +10,14 @@ export const CREATE_PRODUCT_REQUEST = 'CREATE_PRODUCTS_REQUEST';
 export const CREATE_PRODUCT_SUCCESS = 'CREATE_PRODUCTS_SUCCESS';
 export const CREATE_PRODUCT_FAIL = 'CREATE_PRODUCTS_FAIL';
 
+export const UPDATE_PRODUCT_REQUEST = 'UPDATE_PRODUCT_REQUEST';
+export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
+export const UPDATE_PRODUCT_FAIL = 'UPDATE_PRODUCT_FAIL';
+
+export const DELETE_PRODUCT_REQUEST = 'DELETE_PRODUCT_REQUEST';
+export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
+export const DELETE_PRODUCT_FAIL = 'DELETE_PRODUCT_FAIL';
+
 export const getOneProductRequest = productId => {
   return {
     type: GET_ONE_PRODUCT_REQUEST,
@@ -70,3 +78,43 @@ export const createProductFail = error => {
     payload: error,
   };
 };
+
+export const updateProductRequest = productData => {
+  return {
+    type: UPDATE_PRODUCT_REQUEST,
+    payload: productData,
+  };
+};
+
+export const updateProductSuccess = () => {
+  return {
+    type: UPDATE_PRODUCT_SUCCESS,
+  };
+};
+
+export const updateProductFail = error => {
+  return {
+    type: UPDATE_PRODUCT_FAIL,
+    payload: error,
+  };
+};
+
+export const deleteProductRequest = (productId) => {
+  return {
+    type: DELETE_PRODUCT_REQUEST,
+    payload: productId
+  }
+}
+
+export const deleteProductSuccess = () => {
+  return {
+    type: DELETE_PRODUCT_SUCCESS
+  }
+}
+
+export const deleteProductFail = (error) => {
+  return {
+    type: DELETE_PRODUCT_FAIL,
+    payload: error
+  }
+}

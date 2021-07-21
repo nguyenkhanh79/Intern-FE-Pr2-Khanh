@@ -11,9 +11,10 @@ import { useForm, Controller } from "react-hook-form";
 import InputSelect from "components/InputSelect/InputSelect";
 import InputText from "components/InputText/InputText";
 import { nameRegex, emailRegex, phoneNumberRegex } from "utils/index";
-import InputTextArea from "./InputTextarea";
+
 import { formatMoney } from "utils";
 import { Radio, Input, Space } from "antd";
+import InputTextArea from "components/InputTextarea/InputTextarea";
 
 function Checkout() {
     const { t } = useTranslation();
