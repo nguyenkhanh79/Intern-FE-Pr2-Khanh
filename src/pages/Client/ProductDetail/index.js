@@ -85,10 +85,10 @@ function ProductDetail() {
             <div className="product-info">
                 <div className="product-info__top">
                     <div className="top-left">
-                        <img src={product?.image} alt={product?.name} />
+                        <img src={product?.productImage} alt={product?.productName} />
                     </div>
                     <div className="top-right">
-                        <p className="product-title">{product?.name}</p>
+                        <p className="product-title">{product?.productName}</p>
                         <Stars starsNumber={product?.rating}></Stars>
                         <p className="product-description">{product?.description}</p>
                         <div className="product-price">

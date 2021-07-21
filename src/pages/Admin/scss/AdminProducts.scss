@@ -1,6 +1,9 @@
 @import "assets/scss/common";
 
 .admin-section {
+    @include flex-column(flex-start, stretch);
+    height: 100%;
+    
     &__header {
         @include flex-row(flex-start);
         margin-bottom: 2rem;
@@ -25,7 +28,11 @@
     }
 
     &__content {
+        @include flex-column(flex-start, stretch);
         @include shadow2;
+        background-color: $white1;
+        padding: 2rem;
+        flex-grow: 1;
 
         .content-filter {
             @include flex-row(space-between);
@@ -62,10 +69,13 @@
             }
         }
         .content-table {
+            @include flex-column(flex-start, stretch);
             margin-top: 2rem;
+            flex-grow: 1;
 
             table {
                 width: 100%;
+                flex-grow: 1;
                 border-collapse: collapse;
                 table-layout: fixed;
                 background-color: $white1;
@@ -75,6 +85,7 @@
                     color: $white1;
                     th {
                         font-weight: bold;
+                        font-size: 1.6rem;
 
                         &:nth-child(1) {
                             width: 15%;
@@ -89,9 +100,32 @@
                 }
 
                 tbody {
+                    position: relative;
+                    min-height: 0;
+
+                    .data-notfound {
+                        @include absoluteCenter;
+                        font-size: 2rem;
+                        color: $green1;
+                        font-weight: bold;
+                    }
+
                     td {
+                        font-size: 1.6rem;
+                        color: $black2;
+
+                        &.col-name a {
+                            color: $green1;
+                            font-weight: bold;
+
+                            &:hover {
+                                color: $orange1;
+                            }
+                        }
+
                         &.col-image img {
                             width: 15rem;
+                            height: 15rem;object-fit: contain;
                         }
 
                         &.col-description {
@@ -125,6 +159,12 @@
                     text-align: center;
                     font-size: 1.4rem;
                 }
+            }
+
+            .table-pagination {
+                @include flex-row;
+                margin-top: 2rem;
+                padding: 2rem 0
             }
         }
 

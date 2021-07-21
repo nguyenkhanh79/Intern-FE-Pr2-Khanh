@@ -12,13 +12,19 @@ import {
     getOneProductFail,
     getOneProductSuccess,
     getProductsFail,
+    getProductsRequest,
     getProductsSuccess,
     GET_ONE_PRODUCT_REQUEST,
     GET_PRODUCTS_REQUEST,
+    searchProductsFail,
+    searchProductsSuccess,
+    SEARCH_PRODUCTS_REQUEST,
     updateProductFail,
     updateProductSuccess,
     UPDATE_PRODUCT_REQUEST,
 } from "./../actions/productsAction";
+import history from "routing/history";
+import { ADMIN_PRODUCTS_PATH } from "constant/route";
 
 function* fetchOneProduct(action) {
     try {
@@ -46,7 +52,9 @@ function* createProduct(action) {
         const createTask = yield spawn(productsApi.create, action.payload);
         yield delay(700);
         const response = yield join(createTask);
-        yield put(createProductSuccess(response));
+        yield put(createProductSuccess(response));      
+        yield put(getProductsRequest());
+        history.push(ADMIN_PRODUCTS_PATH);
         toast.success(i18n.t("create product success"));
     } catch (error) {
         yield put(createProductFail(error));
@@ -60,6 +68,7 @@ function* updateProduct(action) {
         yield delay(700);
         const response = yield join(updateTask);
         yield put(updateProductSuccess(response));
+        yield put(getProductsRequest());
         toast.success(i18n.t("update product success"));
     } catch (error) {
         yield put(updateProductFail(error));
@@ -71,10 +80,22 @@ function* deleteProduct(action) {
     try {
         yield call(productsApi.remove, action.payload);
         yield put(deleteProductSuccess());
+        yield put(getProductsRequest());
         toast.success(i18n.t("delete product success"));
     } catch (error) {
         yield put(deleteProductFail(error));
         toast.error(i18n.t("delete product fail"));
+    }
+}
+
+function* searchProduct(action) {
+    try {
+        const searchTask = yield spawn(productsApi.search, action.payload);
+        yield delay(700);
+        const response = yield join(searchTask);
+        yield put(searchProductsSuccess(response));
+    } catch (error) {
+        yield put(searchProductsFail(error));
     }
 }
 
@@ -84,6 +105,7 @@ function* watchProductsRequest() {
     yield takeLatest(CREATE_PRODUCT_REQUEST, createProduct);
     yield takeLatest(UPDATE_PRODUCT_REQUEST, updateProduct);
     yield takeLatest(DELETE_PRODUCT_REQUEST, deleteProduct);
+    yield takeLatest(SEARCH_PRODUCTS_REQUEST, searchProduct);
 }
 
 export default watchProductsRequest;

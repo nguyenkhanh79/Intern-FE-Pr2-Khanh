@@ -113,5 +113,6 @@
     "update product fail": "Cập nhật sản phẩm thất bại",
     "delete product success": "Xóa sản phẩm thành công",
     "delete product fail": "Xóa sản phẩm thất bại",
-    "delete product": "Bạn chắc chắn muốn xóa sản phẩm này chứ?"
+    "delete product": "Bạn chắc chắn muốn xóa sản phẩm này chứ?",
+    "not products found": "Không tìm thấy sản phẩm nào!"
 }

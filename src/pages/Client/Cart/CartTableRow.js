@@ -17,9 +17,9 @@ function CartTableRow({ data, quantity, changeQuantity, deleteCart }) {
         <tr key={data.id}>
             <td className="product-info">
                 <div>
-                    <img src={data?.image} alt={data.name} />
+                    <img src={data?.productImage} alt={data.productName} />
                     <Link to={`${PRODUCTS_PATH}/${data.id}`} className="info-title">
-                        {data.name}
+                        {data.productName}
                     </Link>
                 </div>
             </td>
