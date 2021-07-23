@@ -15,6 +15,7 @@ import {
     getProductsRequest,
     getProductsSuccess,
     GET_ONE_PRODUCT_REQUEST,
+    GET_PRODUCTS_FILTERS_REQUEST,
     GET_PRODUCTS_REQUEST,
     searchProductsFail,
     searchProductsSuccess,
@@ -69,6 +70,7 @@ function* updateProduct(action) {
         const response = yield join(updateTask);
         yield put(updateProductSuccess(response));
         yield put(getProductsRequest());
+        history.push(ADMIN_PRODUCTS_PATH);
         toast.success(i18n.t("update product success"));
     } catch (error) {
         yield put(updateProductFail(error));
@@ -97,6 +99,17 @@ function* searchProduct(action) {
     } catch (error) {
         yield put(searchProductsFail(error));
     }
+
+}
+function* fetchProductsFilters(action) {
+    try {
+        const fetchTask = yield spawn(productsApi.getWithFilters, action.payload);
+        yield delay(500);
+        const response = yield join(fetchTask);
+        yield put(getProductsSuccess(response));
+    } catch (error) {
+        yield put(getProductsFail(error));
+    }
 }
 
 function* watchProductsRequest() {
@@ -106,6 +119,7 @@ function* watchProductsRequest() {
     yield takeLatest(UPDATE_PRODUCT_REQUEST, updateProduct);
     yield takeLatest(DELETE_PRODUCT_REQUEST, deleteProduct);
     yield takeLatest(SEARCH_PRODUCTS_REQUEST, searchProduct);
+    yield takeLatest(GET_PRODUCTS_FILTERS_REQUEST, fetchProductsFilters);
 }
 
 export default watchProductsRequest;

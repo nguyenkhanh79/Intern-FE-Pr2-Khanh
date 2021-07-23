@@ -16,7 +16,8 @@ import {
     DELETE_PRODUCT_FAIL,
     SEARCH_PRODUCTS_REQUEST,
     SEARCH_PRODUCTS_SUCCESS,
-    SEARCH_PRODUCTS_FAIL
+    SEARCH_PRODUCTS_FAIL,
+    GET_PRODUCTS_FILTERS_REQUEST
 } from "../actions/productsAction";
 
 const initialState = {
@@ -97,6 +98,8 @@ const productsReducer = (state = initialState, action) => {
         case SEARCH_PRODUCTS_FAIL: {
             return {...state, searchError: action.payload}
         }
+        case GET_PRODUCTS_FILTERS_REQUEST:
+            return { ...state, isFetching: true, fetchError: null };
 
         default:
             return state;

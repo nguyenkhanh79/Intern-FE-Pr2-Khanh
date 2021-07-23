@@ -22,6 +22,8 @@ export const SEARCH_PRODUCTS_REQUEST = 'SEARCH_PRODUCTS_REQUEST';
 export const SEARCH_PRODUCTS_SUCCESS = 'SEARCH_PRODUCTS_SUCCESS';
 export const SEARCH_PRODUCTS_FAIL = 'SEARCH_PRODUCTS_FAIL';
 
+export const GET_PRODUCTS_FILTERS_REQUEST = "GET_PRODUCTS_FILTERS_REQUEST";
+
 export const getOneProductRequest = productId => {
   return {
     type: GET_ONE_PRODUCT_REQUEST,
@@ -141,5 +143,12 @@ export const searchProductsFail = (error) => {
   return {
     type: SEARCH_PRODUCTS_FAIL,
     payload: error
+  }
+}
+
+export const getProductsFiltersRequest = (filters) => {
+  return {
+    type: GET_PRODUCTS_FILTERS_REQUEST,
+    payload: filters
   }
 }

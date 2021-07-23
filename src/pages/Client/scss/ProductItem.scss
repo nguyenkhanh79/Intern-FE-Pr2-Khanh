@@ -6,9 +6,20 @@
     border-radius: 1.5rem;
     overflow: hidden;
     transition: 0.3s;
+    height: 100%;
 
     &:hover {
         box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    }
+
+    &__top {
+        @include flex-row;
+        width: 100%;
+        
+        img {
+            max-width: 14.5rem;
+            height: 14.5rem;
+        }
     }
 
     &__bottom {

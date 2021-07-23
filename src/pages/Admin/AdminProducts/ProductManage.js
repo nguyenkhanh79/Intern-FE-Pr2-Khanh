@@ -71,6 +71,9 @@ function ProductManage() {
 
     const onSubmit = (data) => {
         data.productImage = productImage.file;
+        data.quantity = parseFloat(data.quantity);
+        data.price = parseFloat(data.price);
+        data.discount = parseFloat(data.discount);
         if (isAddProduct) {
             dispatch(createProductRequest(data));
         } else {
