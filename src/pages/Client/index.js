@@ -8,10 +8,11 @@ import Products from "./Products";
 import ProdcutDetail from "./ProductDetail";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { PRODUCTS_PATH, CART_PATH, CHECKOUT_PATH, ORDER_PATH } from "constant/route";
+import { PRODUCTS_PATH, CART_PATH, CHECKOUT_PATH, ORDER_PATH, ROOT_PATH } from "constant/route";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
 import Order from "./Order";
+import Home from "./Home";
 
 function Client() {
     let { path, url } = useRouteMatch();
@@ -25,8 +26,11 @@ function Client() {
     return (
         <>
             <Header></Header>
-            <main className="main-content main-products">
-                <Switch>
+            <Switch>
+                <Route path={ROOT_PATH} exact>
+                    <Home></Home>
+                </Route>
+                <main className="main-content main-products">
                     <Route path={PRODUCTS_PATH} exact>
                         <Products></Products>
                     </Route>
@@ -42,11 +46,11 @@ function Client() {
                     <Route path={ORDER_PATH}>
                         <Order></Order>
                     </Route>
-                    <Route path="*">
-                        <div>404</div>
-                    </Route>
-                </Switch>
-            </main>
+                </main>
+                <Route path="*">
+                    <div>404</div>
+                </Route>
+            </Switch>
             <Footer></Footer>
         </>
     );
