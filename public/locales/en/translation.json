@@ -110,5 +110,10 @@
     "update product fail": "Update product fail",
     "delete product": "Are you sure you want to delete this product?",
     "not products found": "Not products found!",
-    "reset filter": "Reset filter"
+    "reset filter": "Reset filter",
+    "cart detail": "Cart detail",
+    "address error": "Invalid address",
+    "create order fail": "Create order fail",
+    "thanks": "Thank you!",
+    "order received": "Your order has been recorded. We always strive to bring the best product quality. If you have any problems, please contact us."
 }

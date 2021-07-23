@@ -115,5 +115,10 @@
     "delete product fail": "Xóa sản phẩm thất bại",
     "delete product": "Bạn chắc chắn muốn xóa sản phẩm này chứ?",
     "not products found": "Không tìm thấy sản phẩm nào!",
-    "reset filter": "Đặt lại bộ lọc"
+    "reset filter": "Đặt lại bộ lọc",
+    "cart detail": "Chi tiết giỏ hàng",
+    "address error": "Địa chỉ không hợp lệ",
+    "create order fail": "Đặt hàng thất bại",
+    "thanks": "Cảm ơn!",
+    "order received": "Đơn hàng của bạn đã được ghi lại. Chúng tôi luôn nỗ lực để mang đến chất lượng sản phẩm tốt nhất. Nếu có bất cứ vấn đề nào hãy liên hệ với chúng tôi."
 }

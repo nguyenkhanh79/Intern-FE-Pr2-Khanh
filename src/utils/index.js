@@ -64,7 +64,9 @@ export const removeVnMark = (str) => {
 };
 
 export const generateKeywords = (displayName) => {
-    const name = removeVnMark(displayName).split(" ").filter((word) => word);
+    const name = removeVnMark(displayName)
+        .split(" ")
+        .filter((word) => word);
     console.log(name);
     const length = name.length;
     let flagArray = [];
@@ -115,4 +117,12 @@ export function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-  }
+}
+
+export function addDot(number) {
+    return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+}
+
+export function removeDot(str) {
+    return parseFloat(str.split('.').join(""));
+}
