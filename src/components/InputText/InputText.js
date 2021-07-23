@@ -10,6 +10,7 @@ function InputText({
     validatePattern,
     type = "text",
     defaultValue,
+    disabled = false,
 }) {
     const { t } = useTranslation();
     return (
@@ -26,6 +27,7 @@ function InputText({
                         value={value || ""}
                         type={type}
                         id={fieldName}
+                        disabled={disabled}
                     />
                 )}
                 rules={{

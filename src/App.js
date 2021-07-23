@@ -1,6 +1,7 @@
 import React from "react";
 import MainRoute from "routing/MainRoute";
 import { ToastContainer, Slide } from "react-toastify";
+import ProfileModal from "components/ProfileModal/ProfileModal";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     fontSize: 16,
                 }} 
             />
+            <ProfileModal/>
         </div>
     );
 }
