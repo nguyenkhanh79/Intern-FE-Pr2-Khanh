@@ -12,3 +12,4 @@ export const ADMIN_MANAGE_PRODUCTS_PATH = "/admin/products/manage";
 export const ADMIN_CATEGOIES_PATH = "/admin/categories";
 export const PROFILE_PATH = "/profile";
 export const ADD_PATH = "/add"
+export const ORDER_PATH = "/order"
