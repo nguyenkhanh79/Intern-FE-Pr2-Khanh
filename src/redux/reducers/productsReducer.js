@@ -17,7 +17,10 @@ import {
     SEARCH_PRODUCTS_REQUEST,
     SEARCH_PRODUCTS_SUCCESS,
     SEARCH_PRODUCTS_FAIL,
-    GET_PRODUCTS_FILTERS_REQUEST
+    GET_PRODUCTS_FILTERS_REQUEST,
+    SEND_COMMENT_REQUEST,
+    SEND_COMMENT_SUCCESS,
+    SEND_COMMENT_FAIL,
 } from "../actions/productsAction";
 
 const initialState = {
@@ -29,26 +32,37 @@ const initialState = {
     isUpdating: false,
     isDeleting: false,
     isSearching: false,
+    isCommenting: false,
     fetchCurrentProductError: null,
     fetchError: null,
     createError: null,
     updateError: null,
     deleteError: null,
-    searchError: null
+    searchError: null,
+    commentError: null,
 };
 
 const productsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ONE_PRODUCT_REQUEST: {
-            return {...state, isFetchingCurrentProduct: true, fetchCurrentProductError: null};
+            return { ...state, isFetchingCurrentProduct: true, fetchCurrentProductError: null };
         }
 
         case GET_ONE_PRODUCT_SUCCESS: {
-            return {...state, currentProduct: action.payload, isFetchingCurrentProduct: false, fetchCurrentProductError: null};
+            return {
+                ...state,
+                currentProduct: action.payload,
+                isFetchingCurrentProduct: false,
+                fetchCurrentProductError: null,
+            };
         }
 
         case GET_ONE_PRODUCT_FAIL: {
-            return {...state, isFetchingCurrentProduct: false, fetchCurrentProductError: action.payload};
+            return {
+                ...state,
+                isFetchingCurrentProduct: false,
+                fetchCurrentProductError: action.payload,
+            };
         }
 
         case GET_PRODUCTS_REQUEST:
@@ -86,21 +100,40 @@ const productsReducer = (state = initialState, action) => {
 
         case DELETE_PRODUCT_FAIL:
             return { ...state, isDeleting: false, deleteError: action.payload };
-        
+
         case SEARCH_PRODUCTS_REQUEST: {
-            return {...state, isSearching: true, searchError: null}
+            return { ...state, isSearching: true, searchError: null };
         }
 
         case SEARCH_PRODUCTS_SUCCESS: {
-            return {...state, data:action.payload, isSearching: false}
+            return { ...state, data: action.payload, isSearching: false };
         }
 
         case SEARCH_PRODUCTS_FAIL: {
-            return {...state, searchError: action.payload}
+            return { ...state, searchError: action.payload };
         }
         case GET_PRODUCTS_FILTERS_REQUEST:
             return { ...state, isFetching: true, fetchError: null };
-
+        
+            case SEND_COMMENT_REQUEST: {
+            return {
+                ...state,
+                isCommenting: true,
+                commentError: null,
+            };
+        }
+        case SEND_COMMENT_SUCCESS: {
+            return {
+                ...state,
+                isCommenting: false,
+            };
+        }
+        case SEND_COMMENT_FAIL: {
+            return {
+                isCommenting: false,
+                commentError: action.payload,
+            };
+        }
         default:
             return state;
     }

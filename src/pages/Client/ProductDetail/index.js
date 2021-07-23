@@ -5,13 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import Slider from "react-slick";
 import { addCart } from "redux/actions/cartAction";
-import { getOneProductRequest } from "redux/actions/productsAction";
-import { formatMoney } from "utils";
+import { getOneProductRequest, sendCommentRequest } from "redux/actions/productsAction";
+import { commentRegex, confirmModal, formatMoney, phoneNumberRegex } from "utils";
 import Loading from "../components/Loading";
 import ProductItem from "../components/ProductItem";
 import QuantityInput from "../components/QuantityInput";
 import "../scss/ProductDetail.scss";
 import Stars from "./../components/Stars";
+import { useForm, Controller } from "react-hook-form";
+import { db } from "firebase-config";
+import { CART_PATH } from "constant/route";
+import BtnLoading from "components/Loading/BtnLoading";
 
 function ProductDetail() {
     const history = useHistory();
@@ -23,18 +27,41 @@ function ProductDetail() {
         (state) => state.products.isFetchingCurrentProduct
     );
     const [quantityValue, setQuantityValue] = useState(1);
-    const [ratingValue, setRatingValue] = useState(0);
-    const [commentValue, setCommentValue] = useState("");
     const { productId } = useParams();
+    const currentUser = useSelector((state) => state.auth.currentUser);
+    const {
+        control,
+        handleSubmit,
+        setValue,
+        reset,
+        formState: { errors },
+    } = useForm({ mode: "onTouched" });
+    const [productComments, setProductComments] = useState([]);
+    const isCommenting = useSelector((state) => state.products.isCommenting);
 
     useEffect(() => {
         dispatch(getOneProductRequest(productId));
     }, [dispatch, productId]);
 
+    useEffect(() => {
+        const commentListener = db
+            .collection("comments")
+            .where("productId", "==", productId)
+            .orderBy("createdDate", "asc")
+            .onSnapshot((snapshot) => {
+                const data = [];
+                snapshot.forEach(function (doc) {
+                    data.push({ id: doc.id, ...doc.data() });
+                });
+                setProductComments(data);
+            });
+        return commentListener;
+    }, [productId]);
+
     const handleOnSubmit = (e) => {
         e.preventDefault();
         dispatch(addCart(product, quantityValue));
-        history.push("/cart");
+        history.push(CART_PATH);
     };
 
     const settings = {
@@ -53,32 +80,23 @@ function ProductDetail() {
         return null;
     }
 
-    const commentsDemoData = [
-        {
-            id: "basdc",
-            productId: product.id,
-            comments: [
-                {
-                    userId: "dasdasd",
-                    userName: "Nvkhanh",
-                    avatar: "https://assets.website-files.com/5cb8b10a48eebf8ee23d835b/5fa9a5aeb9e58ca6b693cc15_default-profile-picture1.jpg",
-                    comment:
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam commodi harum enim quis veniam, asperiores aliquam. Modi harum maiores non nesciunt veritatis quibusdam tempora assumenda, explicabo reiciendis optio, porro eos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam commodi harum enim quis veniam, asperiores aliquam. Modi harum maiores non nesciunt veritatis quibusdam tempora assumenda, explicabo reiciendis optio, porro eos.",
-                    rating: 3,
-                    createdAt: "27/7/2021",
-                },
-                {
-                    userId: "dasdasd",
-                    userName: "Nvkhanh2",
-                    avatar: "https://assets.website-files.com/5cb8b10a48eebf8ee23d835b/5fa9a5aeb9e58ca6b693cc15_default-profile-picture1.jpg",
-                    comment:
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam commodi harum enim quis veniam, asperiores aliquam. Modi harum maiores non nesciunt veritatis quibusdam tempora assumenda, explicabo reiciendis optio, porro eos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam commodi harum enim quis veniam, asperiores aliquam. Modi harum maiores non nesciunt veritatis quibusdam tempora assumenda, explicabo reiciendis optio, porro eos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam commodi harum enim quis veniam.",
-                    rating: 4,
-                    createdAt: "27/7/2021",
-                },
-            ],
-        },
-    ];
+    const handleOnCommentSubmit = ({ comment, rating }) => {
+        const commentData = {
+            productId,
+            user: {
+                id: currentUser.id,
+                name: currentUser.name,
+                avatar: currentUser.avatar,
+            },
+            comment,
+            rating,
+        };
+        dispatch(sendCommentRequest(commentData));
+        reset({
+            comment: "",
+            rating: 0,
+        });
+    };
 
     return (
         <section className="product-detail">
@@ -124,50 +142,102 @@ function ProductDetail() {
             <div className="product-comments">
                 <p className="block-title">{t("comments")}</p>
                 <ul className="comments-list">
-                    {commentsDemoData[0].comments.map((item, index) => {
-                        return (
-                            <li className="comment-item" key={index}>
-                                <div className="comment-item__left">
-                                    <img src={item.avatar} alt={item.userName + "avatar"} />
-                                </div>
-                                <div className="comment-item__right">
-                                    <div className="user-name">{item.userName}</div>
-                                    <Stars starsNumber={item.rating}></Stars>
-                                    <div className="user-comment">{item.comment}</div>
-                                    <span className="created-date">{item.createdAt}</span>
-                                </div>
-                            </li>
-                        );
-                    })}
+                    {productComments.length > 0 ? (
+                        productComments.map(
+                            ({ id, user: { name, avatar }, comment, rating, createdAt }, index) => {
+                                return (
+                                    <li className="comment-item" key={id}>
+                                        <div className="comment-item__left">
+                                            <img src={avatar} alt={name + "avatar"} />
+                                        </div>
+                                        <div className="comment-item__right">
+                                            <div className="user-name">{name}</div>
+                                            <Stars starsNumber={rating}></Stars>
+                                            <div className="user-comment">{comment}</div>
+                                            <span className="created-date">{createdAt}</span>
+                                        </div>
+                                    </li>
+                                );
+                            }
+                        )
+                    ) : (
+                        <p className="empty-comment">{t("empty comment")}</p>
+                    )}
                 </ul>
                 <div className="user-rating">
-                    <div className="comment-item">
-                        <div className="comment-item__left">
-                            <img
-                                src="https://assets.website-files.com/5cb8b10a48eebf8ee23d835b/5fa9a5aeb9e58ca6b693cc15_default-profile-picture1.jpg"
-                                alt="avatar"
-                            />
+                    {!currentUser ? (
+                        <p className="require-signin">{t("require signin")}</p>
+                    ) : (
+                        <div className="comment-item">
+                            <div className="comment-item__left">
+                                <img src={currentUser.avatar} alt="avatar" />
+                            </div>
+                            <div className="comment-item__right">
+                                <div className="user-name">
+                                    {currentUser ? currentUser.name : t("anonymous user")}
+                                </div>
+                                <form
+                                    action="#"
+                                    className="user-comment-form"
+                                    onSubmit={handleSubmit(handleOnCommentSubmit)}
+                                >
+                                    <Controller
+                                        name={"rating"}
+                                        control={control}
+                                        render={({
+                                            field: { onChange, onBlur, value, name, ref },
+                                        }) => (
+                                            <Rate
+                                                allowClear={false}
+                                                defaultValue={0}
+                                                value={value}
+                                                onChange={onChange}
+                                                style={{ color: "#ffb524", fontSize: "20px" }}
+                                            />
+                                        )}
+                                        rules={{
+                                            required: {
+                                                value: true,
+                                                message: "Trường trống",
+                                            },
+                                        }}
+                                    />
+                                    {errors.rating && (
+                                        <p className="rating-error">{t("rating error")}</p>
+                                    )}
+                                    <Controller
+                                        name={"comment"}
+                                        control={control}
+                                        render={({
+                                            field: { onChange, onBlur, value, name, ref },
+                                        }) => (
+                                            <textarea
+                                                value={value}
+                                                onChange={onChange}
+                                                onBlur={onBlur}
+                                            ></textarea>
+                                        )}
+                                        rules={{
+                                            required: {
+                                                value: true,
+                                                message: "Trường trống",
+                                            },
+                                            pattern: {
+                                                value: commentRegex,
+                                                message: t(`comment error`),
+                                            },
+                                        }}
+                                    />
+                                    <p className="comment-error">
+                                        {errors.comment && errors.comment.message}
+                                    </p>
+                                    <button type="submit">
+                                        {isCommenting ? <BtnLoading /> : t("comments")}
+                                    </button>
+                                </form>
+                            </div>
                         </div>
-                        <div className="comment-item__right">
-                            <div className="user-name">Current user</div>
-                            <Rate
-                                allowClear={false}
-                                defaultValue={0}
-                                value={ratingValue}
-                                onChange={setRatingValue}
-                                style={{ color: "#ffb524", fontSize: "20px" }}
-                            />
-                            <form action="#" className="user-comment-form">
-                                <textarea
-                                    value={commentValue}
-                                    onChange={(e) => setCommentValue(e.target.value)}
-                                    name="user-comment-input"
-                                    id="user-comment-input"
-                                ></textarea>
-                                <button type="submit">{t("comments")}</button>
-                            </form>
-                        </div>
-                    </div>
+                    )}
                 </div>
             </div>
             <div className="products-relate">

@@ -20,6 +20,9 @@ import {
     searchProductsFail,
     searchProductsSuccess,
     SEARCH_PRODUCTS_REQUEST,
+    sendCommentFail,
+    sendCommentSuccess,
+    SEND_COMMENT_REQUEST,
     updateProductFail,
     updateProductSuccess,
     UPDATE_PRODUCT_REQUEST,
@@ -112,6 +115,17 @@ function* fetchProductsFilters(action) {
     }
 }
 
+function* sendComment(action) {
+    try {
+        const sendTask = yield spawn(productsApi.comment, action.payload);
+        yield delay(500);
+        const response = yield join(sendTask);
+        yield put(sendCommentSuccess(response));
+    } catch (error) {
+        yield put(sendCommentFail(error));
+    }
+}
+
 function* watchProductsRequest() {
     yield takeLatest(GET_ONE_PRODUCT_REQUEST, fetchOneProduct);
     yield takeLatest(GET_PRODUCTS_REQUEST, fetchProducts);
@@ -120,6 +134,7 @@ function* watchProductsRequest() {
     yield takeLatest(DELETE_PRODUCT_REQUEST, deleteProduct);
     yield takeLatest(SEARCH_PRODUCTS_REQUEST, searchProduct);
     yield takeLatest(GET_PRODUCTS_FILTERS_REQUEST, fetchProductsFilters);
+    yield takeLatest(SEND_COMMENT_REQUEST, sendComment);
 }
 
 export default watchProductsRequest;
