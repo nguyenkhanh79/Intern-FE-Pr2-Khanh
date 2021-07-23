@@ -1,4 +1,5 @@
 import firebase, { db, storage } from "firebase-config";
+import { generateKeywords, removeVnMark } from "utils";
 
 async function get(productId) {
     try {
@@ -15,7 +16,7 @@ async function get(productId) {
 
 async function getAll() {
     try {
-        const querySnapshot = await db.collection("products").get();
+        const querySnapshot = await db.collection("products").orderBy("createdDate", "desc").get();
         let data = [];
         querySnapshot.forEach((documentSnapshot) => {
             data.push({
@@ -43,6 +44,7 @@ async function create(productData) {
 
         productData.createdDate = firebase.firestore.FieldValue.serverTimestamp();
         productData.productImage = imageUrl;
+        productData.keywords = generateKeywords(productData.productName)
 
         const response = await db.collection("products").add(productData);
 
@@ -68,6 +70,7 @@ async function update(productData) {
             productData.productImage = imageUrl;
         }
         productData.updatedDate = firebase.firestore.FieldValue.serverTimestamp();
+        productData.keywords = generateKeywords(productData.productName)
         delete productData.createdDate;
         const response = await db.collection("products").doc(productData.id).update(productData);
 
@@ -79,7 +82,23 @@ async function update(productData) {
 
 async function remove(productId) {
     try {
-        db.collection("products").doc(productId).delete();
+        await db.collection("products").doc(productId).delete();
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function search(keywords) {
+    try {
+        const querySnapshot = await db.collection("products").where('keywords', 'array-contains', removeVnMark(keywords)).get();
+        let data = [];
+        querySnapshot.forEach((documentSnapshot) => {
+            data.push({
+                id: documentSnapshot.id,
+                ...documentSnapshot.data(),
+            });
+        });
+        return data;
     } catch (error) {
         throw error;
     }
@@ -91,6 +110,7 @@ const productsApi = {
     create,
     update,
     remove,
+    search
 };
 
 export default productsApi;

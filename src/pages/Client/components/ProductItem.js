@@ -23,11 +23,11 @@ function ProductItem({ item }) {
     return (
         <div className="product-item">
             <div className="product-item__top">
-                <img src={item.image} alt={item.name} />
+                <img src={item.productImage} alt={item.productName} />
             </div>
             <div className="product-item__bottom">
                 <Link to={`${PRODUCTS_PATH}/${item.id}`} className="product-title">
-                    {item.name}
+                    {item.productName}
                 </Link>
                 <Stars starsNumber={item.rating}></Stars>
                 <p className="product-description">{item.description}</p>

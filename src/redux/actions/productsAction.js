@@ -18,6 +18,10 @@ export const DELETE_PRODUCT_REQUEST = 'DELETE_PRODUCT_REQUEST';
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
 export const DELETE_PRODUCT_FAIL = 'DELETE_PRODUCT_FAIL';
 
+export const SEARCH_PRODUCTS_REQUEST = 'SEARCH_PRODUCTS_REQUEST';
+export const SEARCH_PRODUCTS_SUCCESS = 'SEARCH_PRODUCTS_SUCCESS';
+export const SEARCH_PRODUCTS_FAIL = 'SEARCH_PRODUCTS_FAIL';
+
 export const getOneProductRequest = productId => {
   return {
     type: GET_ONE_PRODUCT_REQUEST,
@@ -115,6 +119,27 @@ export const deleteProductSuccess = () => {
 export const deleteProductFail = (error) => {
   return {
     type: DELETE_PRODUCT_FAIL,
+    payload: error
+  }
+}
+
+export const searchProductsRequest = (keywords) => {
+  return {
+    type: SEARCH_PRODUCTS_REQUEST,
+    payload: keywords
+  }
+}
+
+export const searchProductsSuccess = (productsData) => {
+  return {
+    type: SEARCH_PRODUCTS_SUCCESS,
+    payload: productsData
+  }
+}
+
+export const searchProductsFail = (error) => {
+  return {
+    type: SEARCH_PRODUCTS_FAIL,
     payload: error
   }
 }

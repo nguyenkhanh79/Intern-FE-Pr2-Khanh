@@ -14,6 +14,9 @@ import {
     DELETE_PRODUCT_REQUEST,
     DELETE_PRODUCT_SUCCESS,
     DELETE_PRODUCT_FAIL,
+    SEARCH_PRODUCTS_REQUEST,
+    SEARCH_PRODUCTS_SUCCESS,
+    SEARCH_PRODUCTS_FAIL
 } from "../actions/productsAction";
 
 const initialState = {
@@ -24,11 +27,13 @@ const initialState = {
     isCreating: false,
     isUpdating: false,
     isDeleting: false,
+    isSearching: false,
     fetchCurrentProductError: null,
     fetchError: null,
     createError: null,
     updateError: null,
-    deleteError: null
+    deleteError: null,
+    searchError: null
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -80,6 +85,18 @@ const productsReducer = (state = initialState, action) => {
 
         case DELETE_PRODUCT_FAIL:
             return { ...state, isDeleting: false, deleteError: action.payload };
+        
+        case SEARCH_PRODUCTS_REQUEST: {
+            return {...state, isSearching: true, searchError: null}
+        }
+
+        case SEARCH_PRODUCTS_SUCCESS: {
+            return {...state, data:action.payload, isSearching: false}
+        }
+
+        case SEARCH_PRODUCTS_FAIL: {
+            return {...state, searchError: action.payload}
+        }
 
         default:
             return state;
