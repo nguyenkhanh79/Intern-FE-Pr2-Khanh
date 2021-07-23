@@ -8,12 +8,14 @@ import { ADD_PATH, ADMIN_MANAGE_PRODUCTS_PATH } from "constant/route";
 import "../scss/AdminProducts.scss";
 import {
     deleteProductRequest,
+    getProductsFiltersRequest,
     getProductsRequest,
     searchProductsRequest,
 } from "redux/actions/productsAction";
 import { Pagination } from "antd";
 import usePagination from "hooks/usePagination";
 import Loading from "pages/Client/components/Loading";
+import { changeFilterCategories, resetFilter } from "redux/actions/filterAction";
 
 const { Search } = Input;
 const { Option } = Select;
@@ -23,8 +25,8 @@ function AdminProducts() {
     const dispatch = useDispatch();
     const categoriesData = useSelector((state) => state.categories.data);
     const productsData = useSelector((state) => state.products.data);
-    const [categorySelected, setCategorySelected] = useState("all");
-    const { currentData, totalPage, pageSize, setPaginationParam, setCurrentData } = usePagination(
+    const filters = useSelector((state) => state.filters);
+    const { currentData, totalPage, pageSize, setPaginationParam, currentPage } = usePagination(
         "products",
         5
     );
@@ -42,30 +44,38 @@ function AdminProducts() {
 
     useEffect(() => {
         dispatch(getProductsRequest());
-    }, []);
+    }, [dispatch]);
+
+    useEffect(() => {
+        setPaginationParam((state) => {
+            return {
+                ...state,
+                page: 1,
+            };
+        });
+    }, [filters, setPaginationParam]);
+
+    useEffect(() => {
+        dispatch(getProductsFiltersRequest(filters));
+    }, [filters, dispatch]);
 
     function handleOnSearch(e) {
         const { value } = e.target;
+        dispatch(resetFilter())
         if (value) {
             dispatch(searchProductsRequest(value));
         } else {
             dispatch(getProductsRequest());
         }
-        setCategorySelected("all")
     }
+
     function handleOnFilterChange(value) {
-        setCategorySelected(value);
-        const newCurrentData = productsData.filter((item) => {
-            if (value === "all") return true;
-            return item.categoryId === value;
-        });
-        setCurrentData(newCurrentData);
+        dispatch(changeFilterCategories(value, false));
     }
 
     function handleOnDelete(productId) {
         confirmModal(t("warning"), t("delete product"), () => {
             dispatch(deleteProductRequest(productId));
-            setCategorySelected("all")
         });
     }
 
@@ -93,7 +103,7 @@ function AdminProducts() {
                                 defaultValue="all"
                                 style={{ width: 200 }}
                                 onChange={handleOnFilterChange}
-                                value={categorySelected}
+                                value={filters.params.categories.value.length > 0 ? filters.params.categories.value[0] : "all"}
                             >
                                 <Option value="all">{t("all categories")} </Option>
                                 {categoriesData.map((item, index) => (
@@ -160,10 +170,10 @@ function AdminProducts() {
                             )}
                         </tbody>
                     </table>
-                    {productsData.length && (
+                    {productsData.length > 0 && (
                         <div className="table-pagination">
                             <Pagination
-                                defaultCurrent={1}
+                                current={currentPage}
                                 total={totalPage}
                                 pageSize={pageSize}
                                 onChange={handleOnChangePage}

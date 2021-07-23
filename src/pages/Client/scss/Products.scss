@@ -50,6 +50,7 @@
                         transition: 0.3s;
                         font-weight: 500;
                         width: 100%;
+                        cursor: pointer;
 
                         span {
                             margin-left: 1rem;
@@ -57,9 +58,13 @@
                             line-height: 2;
                         }
 
-                        &:hover {
+                        &.active {
                             color: $green1;
                             transform: translateX(1rem);
+                        }
+
+                        &:hover {
+                            color: $green1;
                         }
                     }
                 }
@@ -71,7 +76,7 @@
                     cursor: pointer;
                     transition: 0.3s;
 
-                    &:hover {
+                    &.active {
                         transform: translateX(1rem);
                     }
                 }
@@ -85,9 +90,14 @@
                     color: $black2;
 
                     &:hover {
+                        color: $green1;
+                    }
+
+                    &.active {
                         transform: translateX(1rem);
                         color: $green1;
                     }
+
                     .sign {
                         margin: 0 1rem;
                         font-size: 2rem;
@@ -104,6 +114,14 @@
             }
 
             .price-range-form {
+                .range-input {
+                    @include flex-row(space-between);
+                    width: 14rem;
+
+                    &:last-of-type {
+                        margin-top: 1rem;
+                    }
+                }
                 label {
                     font-size: 1.6rem;
                     font-weight: bold;
@@ -111,8 +129,19 @@
                 }
 
                 input {
-                    width: 6rem;
-                    margin: 0 1rem;
+                    width: 10rem;
+                }
+
+                /* Chrome, Safari, Edge, Opera */
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+
+                /* Firefox */
+                input[type="number"] {
+                    -moz-appearance: textfield;
                 }
 
                 button {
@@ -131,8 +160,13 @@
         }
 
         &__header {
-            @include flex-row(flex-end);
+            @include flex-row(space-between);
             margin-bottom: 1rem;
+
+            .reset-btn {
+                font-size: 1.4rem;
+                font-weight: 500
+            }
 
             .header-right {
                 @include flex-row;
@@ -165,6 +199,9 @@
         }
 
         &__body {
+            min-height: 70vh;
+            position: relative;
+
             .products-list {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -176,6 +213,32 @@
 
                 @include sm {
                     grid-template-columns: 1fr 1fr;
+                }
+            }
+        }
+
+        &__footer {
+            @include flex-row;
+            margin-top: 5rem;
+
+            .custom-pagination {
+                &.ant-pagination .ant-pagination-item-link, a,
+                li {
+                    border: none;
+                    font-size: 2rem;
+                    transition: 0.3s;
+                    color: $black2;
+                    font-weight: bold;
+
+                    &:hover {
+                        color: $green1;
+                    }
+                }
+
+                & .ant-pagination-item-active a {
+                    color: $green1;
+
+                    font-size: 2.5rem;
                 }
             }
         }

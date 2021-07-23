@@ -109,5 +109,6 @@
     "update product success": "Update product success",
     "update product fail": "Update product fail",
     "delete product": "Are you sure you want to delete this product?",
-    "not products found": "Not products found!"
+    "not products found": "Not products found!",
+    "reset filter": "Reset filter"
 }

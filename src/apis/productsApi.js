@@ -1,5 +1,5 @@
 import firebase, { db, storage } from "firebase-config";
-import { generateKeywords, removeVnMark } from "utils";
+import { generateKeywords, getRandomInt, removeVnMark } from "utils";
 
 async function get(productId) {
     try {
@@ -44,7 +44,8 @@ async function create(productData) {
 
         productData.createdDate = firebase.firestore.FieldValue.serverTimestamp();
         productData.productImage = imageUrl;
-        productData.keywords = generateKeywords(productData.productName)
+        productData.keywords = generateKeywords(productData.productName);
+        productData.rating = getRandomInt(2, 5);
 
         const response = await db.collection("products").add(productData);
 
@@ -70,7 +71,7 @@ async function update(productData) {
             productData.productImage = imageUrl;
         }
         productData.updatedDate = firebase.firestore.FieldValue.serverTimestamp();
-        productData.keywords = generateKeywords(productData.productName)
+        productData.keywords = generateKeywords(productData.productName);
         delete productData.createdDate;
         const response = await db.collection("products").doc(productData.id).update(productData);
 
@@ -90,9 +91,42 @@ async function remove(productId) {
 
 async function search(keywords) {
     try {
-        const querySnapshot = await db.collection("products").where('keywords', 'array-contains', removeVnMark(keywords)).get();
+        const querySnapshot = await db
+            .collection("products")
+            .where("keywords", "array-contains", removeVnMark(keywords))
+            .get();
         let data = [];
         querySnapshot.forEach((documentSnapshot) => {
+            data.push({
+                id: documentSnapshot.id,
+                ...documentSnapshot.data(),
+            });
+        });
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function getWithFilters(filters) {
+    try {
+        let query = db.collection("products");
+        const { params, sort } = filters;
+
+        for (let key in params) {
+            const { label, operator, value } = params[key];
+            if(value && value?.length !== 0) {
+                query = query.where(label, operator, value);
+            }
+        }
+
+        if(sort.value) {
+            query = query.orderBy(sort.label, sort.value)
+        }
+
+        const doc = await query.get();
+        let data = [];
+        doc.forEach((documentSnapshot) => {
             data.push({
                 id: documentSnapshot.id,
                 ...documentSnapshot.data(),
@@ -110,7 +144,8 @@ const productsApi = {
     create,
     update,
     remove,
-    search
+    search,
+    getWithFilters,
 };
 
 export default productsApi;

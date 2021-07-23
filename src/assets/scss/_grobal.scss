@@ -212,3 +212,10 @@ body {
         background-color: $orange1;
     }
 }
+
+.data-notfound {
+    @include absoluteCenter;
+    font-size: 2rem;
+    color: $green1;
+    font-weight: bold;
+}

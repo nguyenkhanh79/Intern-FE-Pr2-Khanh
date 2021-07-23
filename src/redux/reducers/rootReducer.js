@@ -4,6 +4,7 @@ import productsReducer from "./productsReducer";
 import cartReducer from "./cartReducer";
 import addressReducer from "./addressReducer";
 import authReducer from "./authReducer";
+import filtersReducer from "./filtersReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -19,4 +20,5 @@ export default combineReducers({
     cart: cartReducer,
     address: addressReducer,
     auth: persistReducer(authPersistConfig, authReducer),
+    filters: filtersReducer,
 });

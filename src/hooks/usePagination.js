@@ -18,6 +18,7 @@ function usePagination(dataName, initPageSize) {
 
     return {
         currentData,
+        currentPage: paginationParam.page,
         totalPage: data.length,
         setPaginationParam,
         setCurrentData,
