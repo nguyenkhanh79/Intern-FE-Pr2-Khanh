@@ -117,6 +117,11 @@
 
     .product-comments {
         margin-top: 5rem;
+
+        .empty-comment {
+            font-size: 1.4rem;
+            color: $black2;
+        }
     }
 
     .comment-item {
@@ -166,9 +171,19 @@
         border-top: 1px solid $black2;
         padding-top: 3rem;
 
+        .require-signin {
+            font-size: 2rem;
+            color: $black2;
+        }
+
+        .rating-error, .comment-error {
+            color: red;
+            margin-top: 1rem;
+            font-size: 1.4rem;
+        }
+
         .user-comment-form {
             width: 100%;
-            margin-top: 2rem;
 
             textarea {
                 display: block;
@@ -181,6 +196,7 @@
                 font-size: 1.4rem;
                 color: $black2;
                 padding: 1rem;
+                margin-top: 2rem;
             }
 
             button {
@@ -191,6 +207,8 @@
                 font-size: 1.8rem;
                 border-radius: 0.5rem;
                 margin-top: 2rem;
+                cursor: pointer;                
+                width: 15rem;
             }
         }
     }

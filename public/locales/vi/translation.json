@@ -129,5 +129,10 @@
     "carousel title 1": "Thực phẩm hữu cơ mỗi ngày",
     "carousel description": "Được lai tạo để có một hàm lượng cao các chất có lợi. Các sản phẩm của chúng tôi đều tươi và tốt cho sức khỏe.",
     "carousel title 2": "Giao thức ăn lành mạnh",
-    "carousel title 3": "Tiết kiệm trên tất cả các Sản phẩm"
+    "carousel title 3": "Tiết kiệm trên tất cả các Sản phẩm",
+    "anonymous user": "Ẩn danh",
+    "rating error": "Vui lòng đánh giá",
+    "comment error": "Bình luận ít nhất 10 kí tự",
+    "require signin": "Bạn phải đăng nhập mới có thể bình luận!",
+    "empty comment": "Chưa có bình luận nào"
 }
