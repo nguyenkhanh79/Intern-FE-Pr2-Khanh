@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Popover, Drawer } from "antd";
 import { signoutRequest } from "redux/actions/authAction";
 import { formatMoney } from "utils";
+import { SHOW_PROFILE_MODAL } from "redux/actions/modalAction";
 
 function Header() {
     const headerNav = useRef(null);
@@ -24,6 +25,7 @@ function Header() {
     const cart = useSelector((state) => state.cart);
     const [drawerVisible, setDrawerVisible] = useState(false);
     const [drawerPlacement, setDrawerPlacement] = useState("right");
+    const [popupVisible, setPopupVisible] = useState(false);
 
     const menuData = [
         { title: "home", url: ROOT_PATH },
@@ -42,10 +44,18 @@ function Header() {
         dispatch(signoutRequest());
     }
 
+    function showModal(e) {
+        e.preventDefault();
+        setPopupVisible(false);
+        dispatch({ type: SHOW_PROFILE_MODAL });
+    }
+
     function popupContent() {
         return (
             <div className="popup-content">
-                <Link to="profile">{t("profile")}</Link>
+                <a href="profile" onClick={showModal}>
+                    {t("profile")}
+                </a>
                 <button type="button" className="signout-btn primary-btn" onClick={signout}>
                     {t("signout")}
                 </button>
@@ -96,7 +106,13 @@ function Header() {
                             </ul>
                         </div>
                         {currentUser ? (
-                            <Popover placement="bottom" content={popupContent()} trigger="click">
+                            <Popover
+                                placement="bottom"
+                                content={popupContent()}
+                                visible={popupVisible}
+                                trigger="click"
+                                onVisibleChange={setPopupVisible}
+                            >
                                 <div className="user">
                                     <div className="user-profile">
                                         <span className="user-name">{currentUser.name}</span>
@@ -104,8 +120,8 @@ function Header() {
                                     <div className="user-avatar">
                                         <img
                                             src={
-                                                currentUser.photoURL
-                                                    ? currentUser.photoURL
+                                                currentUser.avatar
+                                                    ? currentUser.avatar
                                                     : "https://karateinthewoodlands.com/wp-content/uploads/2017/09/default-user-image.png"
                                             }
                                             alt={currentUser.name}

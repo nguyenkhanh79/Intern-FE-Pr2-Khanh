@@ -115,5 +115,10 @@
     "address error": "Invalid address",
     "create order fail": "Create order fail",
     "thanks": "Thank you!",
-    "order received": "Your order has been recorded. We always strive to bring the best product quality. If you have any problems, please contact us."
+    "order received": "Your order has been recorded. We always strive to bring the best product quality. If you have any problems, please contact us.",
+    "user profile": "User profile",
+    "update profile": "Update profile",
+    "avatar image": "Avatar",
+    "update profile fail": "Update profile fail",
+    "update profile success": "Update profile success"
 }

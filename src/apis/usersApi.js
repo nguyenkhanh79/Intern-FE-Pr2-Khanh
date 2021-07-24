@@ -1,4 +1,5 @@
-import { db } from "firebase-config";
+import firebase, { db, storage } from "firebase-config";
+import { generateKeywords } from "utils";
 
 async function get(userId) {
     try {
@@ -12,8 +13,36 @@ async function get(userId) {
         throw error;
     }
 }
+
+async function update(userData) {
+    try {
+        if (typeof userData.avatar === "object") {
+            //upload image
+            // Create a root reference
+            const storageRef = storage.ref();
+
+            // Create a reference
+            const avatarRef = storageRef.child(userData.avatar.name);
+
+            const uploadResult = await avatarRef.put(userData.avatar);
+            const imageUrl = await avatarRef.getDownloadURL();
+
+            userData.avatar = imageUrl;
+        }
+        userData.updatedDate = firebase.firestore.FieldValue.serverTimestamp();
+        userData.keywords = generateKeywords(userData.name);
+        delete userData.createdDate;
+        
+        const response = await db.collection("users").doc(userData.id).update(userData);
+        return userData;
+    } catch (error) {
+        throw error;
+    }
+}
+
 const usersApi = {
-    get
+    get,
+    update
 };
 
 export default usersApi;
