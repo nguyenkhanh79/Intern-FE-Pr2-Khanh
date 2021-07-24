@@ -1,0 +1,78 @@
+@import "assets/scss/common";
+
+.home-page {
+    margin-top: 10rem;
+
+    .carousel-show {
+        .carousel-block {
+            @include flex-row;
+            display: flex !important;
+            height: 50rem;
+
+            & > div {
+                width: 50%;
+            }
+
+            &__left {
+                .left-title {
+                    font-size: 4rem;
+                    font-weight: bold;
+                    color: $green1;
+                    margin-bottom: 2rem;
+                }
+
+                .left-description {
+                    font-size: 2.5rem;
+                    color: $black2;
+                    line-height: 1.3;
+                    margin-bottom: 5rem;
+                }
+
+                .left-btn {
+                    width: 20rem;
+                    padding: 2rem 0;
+                    font-weight: bold;
+                    color: $white1;
+                }
+            }
+
+            &__right {
+                @include flex-row;
+                height: 100%;
+
+                img {
+                    height:90%;
+                }
+            }
+        }
+    }
+}
+
+.ant-carousel .slick-dots {
+    margin: 0 !important;
+}
+
+.carousel-show .ant-carousel .slick-dots li {
+    margin: 0 2rem;
+
+    button {
+        height: 2rem;
+        width: 2rem;
+        border-radius: 50%;
+        background-color: $green1;
+        opacity: 0.1;
+
+        &::before {
+            opacity: 0;
+        }
+    }
+
+    &.slick-active button {
+        opacity: 1;
+        background-color: $green1;
+    }
+}
+
+// .carousel-show .ant-carousel .slick-dots li.slick-active button {
+//     background-color: $green1;
+// }
