@@ -125,4 +125,9 @@
     "carousel description": "Bred for a high content of beneficial substances. Our products are all fresh and healthy.",
     "carousel title 2": "Healthy Food Delivery",
     "carousel title 3": "Save on all Products",
+    "anonymous user": "Anonymous",
+    "rating error": "Please rating",
+    "comment error": "At least 10 character",
+    "require signin": "Sign in to use comment feature",
+    "empty comment": "Comment not found"
 }

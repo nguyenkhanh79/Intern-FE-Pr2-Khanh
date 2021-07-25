@@ -26,5 +26,5 @@ export default combineReducers({
     filters: filtersReducer,
     orders: ordersReducer,
     modals: modalsReducer,
-    users: usersReducer
+    users: usersReducer,
 });

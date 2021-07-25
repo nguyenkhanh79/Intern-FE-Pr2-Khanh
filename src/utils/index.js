@@ -45,6 +45,7 @@ export const phoneNumberRegex = /(09|01[2|6|8|9])+([0-9]{8})\b/g;
 export const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/g;
 export const numberRegex = /^[0-9]*$/g;
 export const discountRegex = /^[1-9][0-9]?$|^100$/g;
+export const commentRegex = /^.{10,}$/g;
 
 export const removeVnMark = (str) => {
     // remove accents
@@ -120,9 +121,9 @@ export function getRandomInt(min, max) {
 }
 
 export function addDot(number) {
-    return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+    return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
 }
 
 export function removeDot(str) {
-    return parseFloat(str.split('.').join(""));
+    return parseFloat(str.split(".").join(""));
 }

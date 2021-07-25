@@ -10,6 +10,7 @@ import {
 import authApi from "./../../apis/authApi";
 import { ADMIN_PATH, ROOT_PATH } from "constant/route";
 import history from "routing/history";
+import { deleteAllCart } from "redux/actions/cartAction";
 
 function* sendSignupRequest({ payload }) {
     try {
@@ -17,6 +18,7 @@ function* sendSignupRequest({ payload }) {
         yield delay(700);
         const user = yield join(sendTask);
         yield put(signupSuccess(user));
+        yield put(deleteAllCart())
         history.push(ROOT_PATH);
     } catch (error) {
         yield put(signupFail(error));
@@ -29,6 +31,7 @@ function* sendSigninRequest({ payload: { email, password } }) {
         yield delay(700);
         const user = yield join(sendTask);
         yield put(signinSuccess(user));
+        yield put(deleteAllCart()) 
         if (user.role === "admin") {
             history.push(ADMIN_PATH);
         } else {
