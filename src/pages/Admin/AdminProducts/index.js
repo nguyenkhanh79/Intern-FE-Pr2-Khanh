@@ -178,6 +178,7 @@ function AdminProducts() {
                                 pageSize={pageSize}
                                 onChange={handleOnChangePage}
                                 pageSizeOptions={[5, 10, 15, 20]}
+                                showSizeChanger={false}
                             />
                         </div>
                     )}
