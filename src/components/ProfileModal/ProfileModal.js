@@ -28,7 +28,7 @@ function ProfileModal() {
 
     useEffect(() => {
         reset(currentUser);
-        setAvatar(currentUser.avatar);
+        setAvatar(currentUser?.avatar);
     }, [currentUser, reset]);
 
     const handleOk = () => {
