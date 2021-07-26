@@ -8,9 +8,10 @@ import Products from "./Products";
 import ProdcutDetail from "./ProductDetail";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { PRODUCTS_PATH, CART_PATH, CHECKOUT_PATH } from "constant/route";
+import { PRODUCTS_PATH, CART_PATH, CHECKOUT_PATH, ORDER_PATH } from "constant/route";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
+import Order from "./Order";
 
 function Client() {
     let { path, url } = useRouteMatch();
@@ -37,6 +38,9 @@ function Client() {
                     </Route>
                     <Route path={CHECKOUT_PATH}>
                         <Checkout></Checkout>
+                    </Route>
+                    <Route path={ORDER_PATH}>
+                        <Order></Order>
                     </Route>
                     <Route path="*">
                         <div>404</div>

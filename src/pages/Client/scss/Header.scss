@@ -106,7 +106,7 @@
             cursor: pointer;
 
             &-profile {
-                margin-right: .5rem;
+                margin-right: 0.5rem;
 
                 .user-name {
                     color: $white1;
@@ -120,7 +120,7 @@
                 height: 3rem;
 
                 img {
-                    border-radius: 50%
+                    border-radius: 50%;
                 }
             }
         }
@@ -228,9 +228,10 @@
             }
             .header-cart {
                 margin-left: 1rem;
-                a {
+                .cart-link {
                     position: relative;
-                    display: block;
+                    cursor: pointer;
+
                     i {
                         font-size: 3rem;
                         color: $white1;
@@ -308,5 +309,98 @@
         margin-top: 1rem;
         font-size: 1.6rem;
         padding: 0.5rem 2rem;
+    }
+}
+
+.cart-drawer {
+    .cart-title {
+        @include flex-row(space-between);
+        border-bottom: 0.5rem solid $green1;
+        padding-bottom: 1.5rem;
+
+        h3 {
+            font-size: 2.5rem;
+            color: $green1;
+            font-weight: bold;
+        }
+
+        i {
+            font-size: 3rem;
+            cursor: pointer;
+            font-weight: bold;
+            color: $green1;
+            transition: 0.3s;
+
+            &:hover {
+                color: $orange1;
+            }
+        }
+    }
+
+    .cart-list {
+        height: 66rem;
+        overflow-y: auto;
+
+        /* width */
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        li {
+            @include flex-row;
+            border-bottom: 5px solid $white5;
+            margin-top: 2rem;
+
+            & > div {
+                width: 50%;
+            }
+
+            .item-right {
+                padding-left: 2rem;
+
+                p {
+                    color: $black2;
+                    font-size: 1.6rem;
+
+                    &.name {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+
+    .cart-total {
+        @include flex-row(space-between);
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: $green1;
+
+        & span:last-child {
+            font-size: 2.5rem;
+        }
+    }
+
+    .cart-btn {
+        padding: 3rem 0;
+        font-weight: bold;
+        color: $white1;
     }
 }

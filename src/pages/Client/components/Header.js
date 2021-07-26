@@ -1,11 +1,19 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ROOT_PATH, PRODUCTS_PATH, BLOGS_PATH, CONTACT_PATH, SIGN_IN_PATH, SIGN_UP_PATH } from "constant/route";
+import {
+    ROOT_PATH,
+    PRODUCTS_PATH,
+    BLOGS_PATH,
+    CONTACT_PATH,
+    SIGN_IN_PATH,
+    SIGN_UP_PATH,
+} from "constant/route";
 import "../scss/Header.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { Popover, Button } from "antd";
+import { Popover, Drawer } from "antd";
 import { signoutRequest } from "redux/actions/authAction";
+import { formatMoney } from "utils";
 
 function Header() {
     const headerNav = useRef(null);
@@ -13,6 +21,9 @@ function Header() {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.auth.currentUser);
+    const cart = useSelector((state) => state.cart);
+    const [drawerVisible, setDrawerVisible] = useState(false);
+    const [drawerPlacement, setDrawerPlacement] = useState("right");
 
     const menuData = [
         { title: "home", url: ROOT_PATH },
@@ -40,6 +51,18 @@ function Header() {
                 </button>
             </div>
         );
+    }
+
+    function showDrawer() {
+        setDrawerVisible(true);
+    }
+
+    function onClose() {
+        setDrawerVisible(false);
+    }
+
+    function onChange(e) {
+        setDrawerPlacement(e.target.value);
     }
 
     return (
@@ -109,11 +132,11 @@ function Header() {
                     </div>
                 </div>
                 <div className="header__right">
-                    <div className="header-cart">
-                        <Link to="/cart">
+                    <div className="header-cart" onClick={showDrawer}>
+                        <div className="cart-link">
                             <i className="bx bxs-cart-alt"></i>
                             <span>{cartQuantity}</span>
-                        </Link>
+                        </div>
                     </div>
                     <div className="header-menu" onClick={(e) => toggleMenu(e)}>
                         <div className="bar1"></div>
@@ -122,6 +145,47 @@ function Header() {
                     </div>
                 </div>
             </div>
+            <Drawer
+                placement={drawerPlacement}
+                closable={false}
+                onClose={onClose}
+                visible={drawerVisible}
+                key={drawerPlacement}
+                className="cart-drawer"
+                width="350"
+                zIndex={1000000}
+            >
+                <div className="cart-title">
+                    <h3>{t("cart")}</h3>
+                    <i className="bx bx-x" onClick={onClose}></i>
+                </div>
+                <ul className="cart-list">
+                    {cart.products.map(({ data, quantity }) => {
+                        return (
+                            <li key={data.id}>
+                                <div className="item-left">
+                                    <img src={data.productImage} alt={data.productName} />
+                                </div>
+                                <div className="item-right">
+                                    <p className="name">{data.productName}</p>
+                                    <p className="price">{formatMoney(data.price)} đ</p>
+                                    <p className="quantity">
+                                        {quantity} {data.unit}
+                                    </p>
+                                    <p className="total">{formatMoney(data.price * quantity)} đ</p>
+                                </div>
+                            </li>
+                        );
+                    })}
+                </ul>
+                <p className="cart-total">
+                    <span>{t("total")}</span>
+                    <span>{formatMoney(cart.totalPrice)} đ</span>
+                </p>
+                <Link to="/cart" className="cart-btn btn" onClick={onClose}>
+                    {t("cart detail")}
+                </Link>
+            </Drawer>
         </header>
     );
 }

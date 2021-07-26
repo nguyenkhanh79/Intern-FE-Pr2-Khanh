@@ -7,6 +7,7 @@ import authReducer from "./authReducer";
 import filtersReducer from "./filtersReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import ordersReducer from "./ordersReducer";
 
 const authPersistConfig = {
     key: "auth",
@@ -21,4 +22,5 @@ export default combineReducers({
     address: addressReducer,
     auth: persistReducer(authPersistConfig, authReducer),
     filters: filtersReducer,
+    orders: ordersReducer
 });

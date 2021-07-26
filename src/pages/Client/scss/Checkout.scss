@@ -63,6 +63,12 @@
                 background-color: $green1;
                 color: $white1;
                 font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+
+                &:hover {
+                    background-color: $orange1;
+                }
             }
 
             .price-row {
@@ -97,4 +103,3 @@
         }
     }
 }
-

@@ -103,13 +103,6 @@
                     position: relative;
                     min-height: 0;
 
-                    .data-notfound {
-                        @include absoluteCenter;
-                        font-size: 2rem;
-                        color: $green1;
-                        font-weight: bold;
-                    }
-
                     td {
                         font-size: 1.6rem;
                         color: $black2;
