@@ -115,13 +115,13 @@ async function getWithFilters(filters) {
 
         for (let key in params) {
             const { label, operator, value } = params[key];
-            if(value && value?.length !== 0) {
+            if (value && value?.length !== 0) {
                 query = query.where(label, operator, value);
             }
         }
 
-        if(sort.value) {
-            query = query.orderBy(sort.label, sort.value)
+        if (sort.value) {
+            query = query.orderBy(sort.label, sort.value);
         }
 
         const doc = await query.get();
@@ -138,6 +138,15 @@ async function getWithFilters(filters) {
     }
 }
 
+async function comment(commentData) {
+    try {
+        commentData.createdDate = firebase.firestore.FieldValue.serverTimestamp(); 
+        await db.collection("comments").add(commentData);
+    } catch (error) {
+        throw error;
+    }
+}
+
 const productsApi = {
     get,
     getAll,
@@ -146,6 +155,7 @@ const productsApi = {
     remove,
     search,
     getWithFilters,
+    comment,
 };
 
 export default productsApi;

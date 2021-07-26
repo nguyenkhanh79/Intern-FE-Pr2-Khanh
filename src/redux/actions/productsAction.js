@@ -24,6 +24,10 @@ export const SEARCH_PRODUCTS_FAIL = 'SEARCH_PRODUCTS_FAIL';
 
 export const GET_PRODUCTS_FILTERS_REQUEST = "GET_PRODUCTS_FILTERS_REQUEST";
 
+export const SEND_COMMENT_REQUEST = "SEND_COMMENT_REQUEST";
+export const SEND_COMMENT_SUCCESS = "SEND_COMMENT_SUCCESS";
+export const SEND_COMMENT_FAIL = "SEND_COMMENT_FAIL";
+
 export const getOneProductRequest = productId => {
   return {
     type: GET_ONE_PRODUCT_REQUEST,
@@ -150,5 +154,25 @@ export const getProductsFiltersRequest = (filters) => {
   return {
     type: GET_PRODUCTS_FILTERS_REQUEST,
     payload: filters
+  }
+}
+
+export const sendCommentRequest = (commentData) => {
+  return {
+      type: SEND_COMMENT_REQUEST,
+      payload: commentData
+  }
+}
+
+export const sendCommentSuccess = () => {
+  return {
+      type: SEND_COMMENT_SUCCESS,
+  }
+}
+
+export const sendCommentFail = (error) => {
+  return {
+      type: SEND_COMMENT_FAIL,
+      payload: error
   }
 }
