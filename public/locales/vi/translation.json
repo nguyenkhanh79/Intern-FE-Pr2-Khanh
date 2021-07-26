@@ -120,5 +120,10 @@
     "address error": "Địa chỉ không hợp lệ",
     "create order fail": "Đặt hàng thất bại",
     "thanks": "Cảm ơn!",
-    "order received": "Đơn hàng của bạn đã được ghi lại. Chúng tôi luôn nỗ lực để mang đến chất lượng sản phẩm tốt nhất. Nếu có bất cứ vấn đề nào hãy liên hệ với chúng tôi."
+    "order received": "Đơn hàng của bạn đã được ghi lại. Chúng tôi luôn nỗ lực để mang đến chất lượng sản phẩm tốt nhất. Nếu có bất cứ vấn đề nào hãy liên hệ với chúng tôi.",
+    "user profile": "Thông tin tài khoản",
+    "update profile": "Cập nhật",
+    "avatar image": "Hình đại diện",
+    "update profile fail": "Cập nhật thông tin tài khoản thất bại",
+    "update profile success": "Cập nhật thông tin tài khoản thành công"
 }

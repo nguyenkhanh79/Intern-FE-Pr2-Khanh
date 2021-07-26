@@ -107,6 +107,10 @@ body {
             &:focus {
                 border: 3px solid $green1;
             }
+
+            &:disabled {
+                background-color: $gray2 !important;
+            }
         }
 
         textarea {
