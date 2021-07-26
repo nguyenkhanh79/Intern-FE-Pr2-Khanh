@@ -14,6 +14,7 @@ function usePagination(dataName, initPageSize) {
         const start = (page - 1) * pageSize;
         const end = start + pageSize;
         setCurrentData(data?.slice(start, end));
+        console.log('run');
     }, [paginationParam, data]);
 
     return {

@@ -13,10 +13,12 @@ import {
     ADMIN_MANAGE_PRODUCTS_PATH,
     ADMIN_PATH,
     ADMIN_PRODUCTS_PATH,
+    ADMIN_USERS_PATH,
 } from "constant/route";
 import ProductManage from "./AdminProducts/ProductManage";
 import AdminDashboard from "./AdminDashboard";
 import AdminCategories from "./AdminCategories";
+import AdminUsers from "./AdminUsers";
 
 function Admin() {
     const dispatch = useDispatch();
@@ -46,6 +48,9 @@ function Admin() {
                         </Route>
                         <Route path={ADMIN_CATEGOIES_PATH}>
                             <AdminCategories></AdminCategories>
+                        </Route>
+                        <Route path={ADMIN_USERS_PATH}>
+                            <AdminUsers></AdminUsers>
                         </Route>
                         <Route path="*">
                             <div>404</div>

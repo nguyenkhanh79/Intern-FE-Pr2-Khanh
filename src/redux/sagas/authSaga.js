@@ -11,6 +11,7 @@ import authApi from "./../../apis/authApi";
 import { ADMIN_PATH, ROOT_PATH } from "constant/route";
 import history from "routing/history";
 import { deleteAllCart } from "redux/actions/cartAction";
+import i18n from "i18n.js";
 
 function* sendSignupRequest({ payload }) {
     try {
@@ -30,6 +31,9 @@ function* sendSigninRequest({ payload: { email, password } }) {
         const sendTask = yield spawn(authApi.signin, email, password);
         yield delay(700);
         const user = yield join(sendTask);
+        if(user?.status === "locked") {
+            throw new Error(i18n.t("account is locked"))
+        }
         yield put(signinSuccess(user));
         yield put(deleteAllCart()) 
         if (user.role === "admin") {

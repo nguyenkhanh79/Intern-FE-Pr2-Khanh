@@ -9,7 +9,7 @@ export function debounce(func, wait) {
 
         let executeFunction = function () {
             func.apply(context, args);
-        };
+        }; 
 
         clearTimeout(timeout);
         timeout = setTimeout(executeFunction, wait);
@@ -20,7 +20,7 @@ export function formatMoney(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-export function confirmModal(title, content, onOk) {
+export function confirmModal(title, content, onOk, okText = "Xóa") {
     antd.Modal.confirm({
         title: title,
         content: content,
@@ -31,7 +31,7 @@ export function confirmModal(title, content, onOk) {
         okButtonProps: {
             style: { backgroundColor: "#0eb58e", borderColor: "#0eb58e" },
         },
-        okText: "Xóa",
+        okText: okText,
         onOk: onOk,
     });
 }

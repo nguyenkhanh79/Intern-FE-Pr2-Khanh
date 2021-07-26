@@ -61,6 +61,7 @@ function Checkout() {
         )?.district_name;
         data.ward = wardData.find((item) => item.ward_id === data.ward)?.ward_name;
         data.order = cart;
+        data.note = data.note ? data.note : "";
         dispatch(createOrderRequest(data))
     };
 

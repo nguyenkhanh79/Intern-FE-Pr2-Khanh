@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, NavLink } from "react-router-dom";
-import { ADMIN_CATEGOIES_PATH, ADMIN_PATH, ADMIN_PRODUCTS_PATH } from "./../../../constant/route";
+import { ADMIN_CATEGOIES_PATH, ADMIN_PATH, ADMIN_PRODUCTS_PATH, ADMIN_USERS_PATH } from "./../../../constant/route";
 import "../scss/AdminSidebar.scss";
 import { useLocation } from "react-router-dom";
 
@@ -13,6 +13,10 @@ function AdminSidebar() {
         {
             title: "dashboard",
             url: ADMIN_PATH,
+        },
+        {
+            title: "users",
+            url: ADMIN_USERS_PATH,
         },
         {
             title: "products",

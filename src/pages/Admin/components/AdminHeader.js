@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./../scss/AdminHeader.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 import { signoutRequest } from "redux/actions/authAction";
 import { Popover } from "antd";
 import { PROFILE_PATH } from "constant/route";
+import { SHOW_PROFILE_MODAL } from "redux/actions/modalAction";
 
 function AdminHeader() {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const [popupVisible, setPopupVisible] = useState(false);
 
     const currentUser = useSelector((state) => state.auth.currentUser);
 
@@ -17,10 +19,18 @@ function AdminHeader() {
         dispatch(signoutRequest());
     }
 
+    function showModal(e) {
+        e.preventDefault();
+        setPopupVisible(false);
+        dispatch({ type: SHOW_PROFILE_MODAL });
+    }
+
     function userPopup() {
         return (
             <div className="popup-content">
-                <Link to={PROFILE_PATH}>{t("profile")}</Link>
+                <a href="profile" onClick={showModal}>
+                    {t("profile")}
+                </a>
                 <button type="button" className="signout-btn primary-btn" onClick={signout}>
                     {t("signout")}
                 </button>
@@ -55,14 +65,20 @@ function AdminHeader() {
                         </div>
                     </div>
                 </Popover>
-                <Popover placement="bottom" content={userPopup()} trigger="click">
+                <Popover
+                    placement="bottom"
+                    content={userPopup()}
+                    trigger="click"
+                    visible={popupVisible}
+                    onVisibleChange={setPopupVisible}
+                >
                     <div className="user">
                         <span className="user-name">{currentUser.name}</span>
                         <div className="user-avatar">
                             <img
                                 src={
-                                    currentUser.photoURL
-                                        ? currentUser.photoURL
+                                    currentUser.avatar
+                                        ? currentUser.avatar
                                         : "https://karateinthewoodlands.com/wp-content/uploads/2017/09/default-user-image.png"
                                 }
                                 alt={currentUser.name}

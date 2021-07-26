@@ -38,6 +38,7 @@ function ProductDetail() {
     } = useForm({ mode: "onTouched" });
     const [productComments, setProductComments] = useState([]);
     const isCommenting = useSelector((state) => state.products.isCommenting);
+    const [relatedProducts, setRelatedProducts] = useState([]);
 
     useEffect(() => {
         dispatch(getOneProductRequest(productId));
@@ -55,8 +56,29 @@ function ProductDetail() {
                 });
                 setProductComments(data);
             });
+
         return commentListener;
     }, [productId]);
+
+    useEffect(() => {
+        if (!product) {
+            return;
+        }
+
+        const relatedProductsListener = db
+            .collection("products")
+            .where("categoryId", "==", product.categoryId)
+            .orderBy("createdDate", "asc")
+            .onSnapshot((snapshot) => {
+                const data = [];
+                snapshot.forEach(function (doc) {
+                    data.push({ id: doc.id, ...doc.data() });
+                });
+                setRelatedProducts(data);
+            });
+
+        return relatedProductsListener;
+    }, [product]);
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -243,7 +265,7 @@ function ProductDetail() {
             <div className="products-relate">
                 <p className="block-title">{t("relate title")}</p>
                 <Slider {...settings}>
-                    {data.map((item, index) => (
+                    {relatedProducts.map((item, index) => (
                         <div className="slide-item" key={index}>
                             <ProductItem item={item}></ProductItem>
                         </div>
