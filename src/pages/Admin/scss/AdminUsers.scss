@@ -26,3 +26,11 @@
     @include flex-row;
     margin-top: 3rem;
 }
+
+.user-section {
+    @include flex-column(center, stretch);
+
+    .users-table {
+        flex-grow: 1;
+    }
+}

@@ -61,7 +61,13 @@ function AdminProducts() {
 
     function handleOnSearch(e) {
         const { value } = e.target;
-        dispatch(resetFilter())
+        dispatch(resetFilter());
+        setPaginationParam((state) => {
+            return {
+                ...state,
+                page: 1,
+            };
+        });
         if (value) {
             dispatch(searchProductsRequest(value));
         } else {
@@ -93,7 +99,7 @@ function AdminProducts() {
                     <div className="search-filter">
                         <Search placeholder={t("search")} onChange={handleOnSearch} enterButton />
                         <Link to={ADMIN_MANAGE_PRODUCTS_PATH + ADD_PATH}>
-                            <i class="bx bx-plus"></i>
+                            <i className="bx bx-plus"></i>
                         </Link>
                     </div>
                     <div className="categories-filter">
@@ -103,7 +109,11 @@ function AdminProducts() {
                                 defaultValue="all"
                                 style={{ width: 200 }}
                                 onChange={handleOnFilterChange}
-                                value={filters.params.categories.value.length > 0 ? filters.params.categories.value[0] : "all"}
+                                value={
+                                    filters.params.categories.value.length > 0
+                                        ? filters.params.categories.value[0]
+                                        : "all"
+                                }
                             >
                                 <Option value="all">{t("all categories")} </Option>
                                 {categoriesData.map((item, index) => (
@@ -156,10 +166,10 @@ function AdminProducts() {
                                                     <Link
                                                         to={`${ADMIN_MANAGE_PRODUCTS_PATH}/${item.id}`}
                                                     >
-                                                        <i class="bx bxs-edit-alt"></i>
+                                                        <i className="bx bxs-edit-alt"></i>
                                                     </Link>
                                                     <i
-                                                        class="bx bx-trash"
+                                                        className="bx bx-trash"
                                                         onClick={() => handleOnDelete(item.id)}
                                                     ></i>
                                                 </div>

@@ -14,7 +14,7 @@ import {
 } from "redux/actions/filterAction";
 import { getProductsRequest, searchProductsRequest } from "redux/actions/productsAction";
 
-function Sidebar() {
+function Sidebar({setReset}) {
     const dispatch = useDispatch();
     const categoriesData = useSelector((state) => state.categories.data);
     const activeCategories = useSelector((state) => state.filters.params.categories.value);
@@ -73,6 +73,7 @@ function Sidebar() {
         e.preventDefault()
         const { value } = e.target;
         dispatch(resetFilter())
+        setReset(state => !state)
         if (value) {
             dispatch(searchProductsRequest(value));
         } else {

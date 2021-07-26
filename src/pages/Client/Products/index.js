@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../scss/Products.scss";
 import Sidebar from "./Sidebar";
 import ProductsShow from "./ProductsShow";
@@ -10,6 +10,7 @@ import { getProductsFiltersRequest } from "redux/actions/productsAction";
 function Products() {
     const dispatch = useDispatch();
     const filters = useSelector(state => state.filters)
+    const [reset, setReset] = useState(false)
 
     useEffect(() => {
         dispatch(getProductsFiltersRequest(filters))
@@ -17,8 +18,8 @@ function Products() {
 
     return (
         <section className="products-container">
-            <Sidebar></Sidebar>
-            <ProductsShow></ProductsShow>
+            <Sidebar setReset={setReset}></Sidebar>
+            <ProductsShow reset={reset}></ProductsShow>
         </section>
     );
 }

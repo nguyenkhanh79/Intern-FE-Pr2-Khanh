@@ -156,7 +156,7 @@ function AdminUsers() {
             <div className="admin-section__header">
                 <h2 className="title">{t("users manage")}</h2>
             </div>
-            <div className="admin-section__content">
+            <div className="admin-section__content user-section">
                 <div className="users-table">
                     <Table columns={columns} dataSource={currentData} pagination={false} />
                 </div>

@@ -7,6 +7,7 @@ import { signoutRequest } from "redux/actions/authAction";
 import { Popover } from "antd";
 import { PROFILE_PATH } from "constant/route";
 import { SHOW_PROFILE_MODAL } from "redux/actions/modalAction";
+import i18n from "i18n";
 
 function AdminHeader() {
     const { t } = useTranslation();
@@ -41,10 +42,18 @@ function AdminHeader() {
     function languagePopup() {
         return (
             <div className="popup-content">
-                <span className="language-list">Tiếng Việt</span>
-                <span className="language-list">English</span>
+                <span className="language-list" onClick={() => changeLanguage("vi")}>
+                    Tiếng Việt
+                </span>
+                <span className="language-list" onClick={() => changeLanguage("en")}>
+                    English
+                </span>
             </div>
         );
+    }
+
+    function changeLanguage(lng) {
+        i18n.changeLanguage(lng);
     }
 
     return (
@@ -60,7 +69,7 @@ function AdminHeader() {
                 <Popover placement="bottom" content={languagePopup()} trigger="click">
                     <div className="language">
                         <div className="languague-title">
-                            <i class="las la-globe"></i>
+                            <i className="las la-globe"></i>
                             <span>{t("language")}</span>
                         </div>
                     </div>

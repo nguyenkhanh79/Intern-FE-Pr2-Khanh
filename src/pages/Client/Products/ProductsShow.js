@@ -10,7 +10,7 @@ import { Pagination } from "antd";
 import usePagination from "hooks/usePagination";
 import { changeFilterPriceSort, resetFilter } from "redux/actions/filterAction";
 
-function ProductsShow() {
+function ProductsShow({reset}) {
     const { t } = useTranslation();
     const data = useSelector((state) => state.products.data);
     const filters = useSelector((state) => state.filters);
@@ -29,7 +29,7 @@ function ProductsShow() {
                 page: 1,
             };
         });
-    }, [filters, setPaginationParam]);
+    }, [filters, setPaginationParam, reset]);
 
     function handleOnChangePage(page, pageSize) {
         setPaginationParam({ page, pageSize });

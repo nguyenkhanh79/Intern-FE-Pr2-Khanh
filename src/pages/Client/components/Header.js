@@ -15,6 +15,7 @@ import { Popover, Drawer } from "antd";
 import { signoutRequest } from "redux/actions/authAction";
 import { formatMoney } from "utils";
 import { SHOW_PROFILE_MODAL } from "redux/actions/modalAction";
+import i18n from "i18n";
 
 function Header() {
     const headerNav = useRef(null);
@@ -75,6 +76,10 @@ function Header() {
         setDrawerPlacement(e.target.value);
     }
 
+    function changeLanguage(lng) {
+        i18n.changeLanguage(lng)
+    }
+
     return (
         <header className="header-container">
             <div className="header main-content">
@@ -101,8 +106,8 @@ function Header() {
                                 <span>{t("language")}</span>
                             </div>
                             <ul className="language-list">
-                                <li className="language-item">Tiếng Việt</li>
-                                <li className="language-item">English</li>
+                                <li className="language-item" onClick={()=>changeLanguage("vi")}>Tiếng Việt</li>
+                                <li className="language-item" onClick={()=>changeLanguage("en")}>English</li>
                             </ul>
                         </div>
                         {currentUser ? (

@@ -149,5 +149,7 @@
     "do lock": "Lock now",
     "do unlock": "Unlock now",
     "up role": "Up role",
-    "account is locked": "Account have been locked"
+    "account is locked": "Account have been locked",    
+    "products management": "Products manage",
+    "categories management": "Categories manage"
 }
