@@ -151,5 +151,22 @@
     "up role": "Up role",
     "account is locked": "Account have been locked",    
     "products management": "Products manage",
-    "categories management": "Categories manage"
+    "categories management": "Categories manage",
+    "your order": "Your order",
+    "all": "All",
+    "unconfirm": "Unconfirm",
+    "delivering": "Delivering",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled",
+    "order tracking": "Order tracking",
+    "order coder": "Order code",
+    "buy date": "Buy date",
+    "order status": "Order status",
+    "status": "Status",
+    "bill": "Bill",
+    "cancel": "Cancel",
+    "remove order": "Are you sure remove this order?",
+    "remove order success": "Remove order success",
+    "cancel order success": "Cancel order success",
+    "orders empty": "Orders empty"
 }

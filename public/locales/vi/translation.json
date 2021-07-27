@@ -154,5 +154,22 @@
     "do lock": "Khóa",
     "do unlock": "Mở khóa",
     "up role": "Nâng quyền",
-    "account is locked": "Tài khoản bị khóa"
+    "account is locked": "Tài khoản bị khóa",
+    "your order": "Đơn hàng của bạn",
+    "all": "Tất cả",
+    "unconfirm": "Chờ xác nhận",
+    "delivering": "Đang giao",
+    "delivered": "Đã giao",
+    "cancelled": "Đã hủy",
+    "order tracking": "Theo dõi đơn hàng",
+    "order code": "Mã đơn hàng",
+    "buy date": "Ngày mua",
+    "order status": "Trạng thái đơn hàng",
+    "status": "Trạng thái",
+    "bill": "Hóa đơn",
+    "cancel": "Hủy",    
+    "remove order": "Bạn có chắn chắn muốn hủy đơn hàng này không?",
+    "remove order success": "Xóa đơn hàng thành công",
+    "cancel order success": "Hủy đơn hàng thành công",
+    "orders empty": "Bạn chưa có đơn hàng nào"
 }

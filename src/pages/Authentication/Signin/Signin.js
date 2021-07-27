@@ -13,7 +13,7 @@ function Signin() {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const history = useHistory();
-    const authError = useSelector((state) => state.auth.error);
+    const signinError = useSelector((state) => state.auth.signinError);
     const isLoading = useSelector((state) => state.auth.isLoading);
 
     const {
@@ -52,9 +52,9 @@ function Signin() {
                             type="password"
                         />
                     </div>
-                    {authError && (
+                    {signinError && (
                         <span className="error-message error-message--mb">
-                            {t(authError.message)}
+                            {t(signinError.message)}
                         </span>
                     )}
 

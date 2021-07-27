@@ -8,6 +8,7 @@ import {
     CONTACT_PATH,
     SIGN_IN_PATH,
     SIGN_UP_PATH,
+    ORDER_TRACKING_PATH,
 } from "constant/route";
 import "../scss/Header.scss";
 import { useSelector, useDispatch } from "react-redux";
@@ -57,6 +58,7 @@ function Header() {
                 <a href="profile" onClick={showModal}>
                     {t("profile")}
                 </a>
+                <Link to={ORDER_TRACKING_PATH}>{t("your order")}</Link>
                 <button type="button" className="signout-btn primary-btn" onClick={signout}>
                     {t("signout")}
                 </button>

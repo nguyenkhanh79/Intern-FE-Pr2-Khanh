@@ -14,3 +14,4 @@ export const PROFILE_PATH = "/profile";
 export const ADD_PATH = "/add";
 export const ORDER_PATH = "/order";
 export const ADMIN_USERS_PATH = "/admin/users";
+export const ORDER_TRACKING_PATH = "/order-tracking";

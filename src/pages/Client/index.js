@@ -1,22 +1,24 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesRequest } from "redux/actions/categoriesAction";
 import { getProductsRequest } from "redux/actions/productsAction";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Products from "./Products";
 import ProdcutDetail from "./ProductDetail";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { PRODUCTS_PATH, CART_PATH, CHECKOUT_PATH, ORDER_PATH, ROOT_PATH } from "constant/route";
+import { PRODUCTS_PATH, CART_PATH, CHECKOUT_PATH, ORDER_PATH, ROOT_PATH, ORDER_TRACKING_PATH, SIGN_IN_PATH } from "constant/route";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
 import Order from "./Order";
 import Home from "./Home";
+import OrderTracking from "./OrderTracking";
 
 function Client() {
     let { path, url } = useRouteMatch();
     const dispatch = useDispatch();
+    const currentUser = useSelector((state) => state.auth.currentUser);
 
     useEffect(() => {
         dispatch(getProductsRequest());
@@ -45,6 +47,9 @@ function Client() {
                     </Route>
                     <Route path={ORDER_PATH}>
                         <Order></Order>
+                    </Route>
+                    <Route path={ORDER_TRACKING_PATH}>
+                        {currentUser ? <OrderTracking></OrderTracking> : <Redirect to={SIGN_IN_PATH} />}
                     </Route>
                 </main>
                 <Route path="*">

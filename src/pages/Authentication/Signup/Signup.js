@@ -15,7 +15,7 @@ function Signin() {
     const dispatch = useDispatch();
     const history = useHistory();
     const isLoading = useSelector((state) => state.auth.isLoading);
-    const authError = useSelector((state) => state.auth.error);
+    const signupError = useSelector((state) => state.auth.signupError);
 
     const {
         control,
@@ -91,9 +91,9 @@ function Signin() {
                     <div className="row-block">
                         <InputText control={control} fieldName="address" error={errors.address} />
                     </div>
-                    {authError && (
+                    {signupError && (
                         <span className="error-message error-message--mb">
-                            {t(authError.message)}
+                            {t(signupError.message)}
                         </span>
                     )}
                     <button className={"primary-btn"} type="submit" disabled={isLoading}>

@@ -36,6 +36,7 @@ function Checkout() {
     const isFetchingWard = useSelector((state) => state.address.isFetchingWard);
     const cart = useSelector((state) => state.cart);
     const isCreating = useSelector((state) => state.orders.isCreating);
+    const currentUser = useSelector((state) => state.auth.currentUser);
 
     useEffect(() => {
         dispatch(getProvinceRequest());
@@ -62,7 +63,11 @@ function Checkout() {
         data.ward = wardData.find((item) => item.ward_id === data.ward)?.ward_name;
         data.order = cart;
         data.note = data.note ? data.note : "";
-        dispatch(createOrderRequest(data))
+        data.status = "unconfirm";
+        data.userId = currentUser ? currentUser.id : "";
+        data.tax = 10;
+        data.shippingFee = 30000;
+        dispatch(createOrderRequest(data));
     };
 
     return (

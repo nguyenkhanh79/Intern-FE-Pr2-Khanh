@@ -1,0 +1,123 @@
+@import "assets/scss/common";
+
+.order-card {
+    border: 1px solid $white4;
+    padding: 2rem;
+    margin-bottom: 2rem;
+
+    .order-action {
+        @include flex-row(space-between);
+        margin-top: 3rem;
+
+        button {
+            font-size: 1.6rem;
+            border-radius: .5rem;
+        }
+    }
+}
+
+.order-empty {
+    @include flex-row;
+    height: 50vh;
+    font-size: 3rem;
+    color: $black2
+}
+
+.order-block {
+    @include flex-row(center, stretch);
+
+    & > div {
+        flex: 1;
+    }
+
+    span {
+        color: $black2;
+    }
+
+    .field-title {
+        font-weight: bold;
+    }
+
+    .status-text {
+        font-size: 1.4rem;
+    }
+
+    &__left {
+        @include flex-column(space-between, flex-start);
+
+        .order-detail {
+            & > h4,
+            & > p {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .order-bill-total {
+            font-size: 2rem;
+
+            & span:last-child {
+                color: $green1;
+                font-weight: bold;
+            }
+        }
+    }
+
+    &__right {
+        .product-list {
+            max-height: 30rem;
+            overflow-y: scroll;
+            border: 1px solid $white4;
+            /* width */
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: #ccc;
+            }
+
+            /* Handle on hover */
+            &::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+        }
+
+        .product-item {
+            @include flex-row(flex-start, flex-start);
+            flex-direction: row !important;
+            box-shadow: none;
+            padding-top: 1rem;
+            border-radius: 0;
+            padding-right: 2rem;
+
+            & + .product-item {
+                margin-top: 1rem;
+                border-top: 1px solid $white5;
+            }
+
+            &__left {
+                width: 10rem;
+                overflow: hidden;
+            }
+
+            &__right {
+                @include flex-row;
+                flex-grow: 1;
+                .product-info {
+                    flex-grow: 1;
+                }
+                .product-total span {
+                    color: $green1;
+                    font-weight: bold;
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    }
+}

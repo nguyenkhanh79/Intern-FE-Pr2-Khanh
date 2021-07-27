@@ -10,7 +10,8 @@ import {
 
 const initialState = {
     currentUser: null,
-    error: null,
+    signinError: null,
+    signupError: null,
     isLoading: false,
 };
 
@@ -19,14 +20,13 @@ const authReducer = (state = initialState, action) => {
         case SIGNIN_REQUEST: {
             return {
                 ...state,
-                error: null,
+                signinError: null,
                 isLoading: true,
             };
         }
         case SIGNIN_SUCCESS: {
             return {
                 currentUser: action.payload,
-                error: null,
                 isLoading: false,
             };
         }
@@ -34,28 +34,27 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                error: action.payload,
+                signinError: action.payload,
             };
         }
         case SIGNUP_REQUEST: {
             return {
                 ...state,
-                error: null,
+                signupError: null,
                 isLoading: true,
             };
         }
         case SIGNUP_SUCCESS: {
             return {
                 currentUser: action.payload,
-                error: null,
                 isLoading: false,
             };
         }
         case SIGNUP_FAIL: {
             return {
                 ...state,
-                isLoading: false,
-                error: action.payload,
+                isLoading: false,                
+                signupError: action.payload,
             };
         }
         case SIGNOUT_REQUEST: {

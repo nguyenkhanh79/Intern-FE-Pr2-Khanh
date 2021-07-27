@@ -1,4 +1,5 @@
 import * as antd from "antd";
+import moment from 'momentConfig'
 
 export function debounce(func, wait) {
     let timeout;
@@ -126,4 +127,8 @@ export function addDot(number) {
 
 export function removeDot(str) {
     return parseFloat(str.split(".").join(""));
+}
+
+export function formatDate(str) {
+    return moment(str).format("dddd, l, H:mm")
 }
