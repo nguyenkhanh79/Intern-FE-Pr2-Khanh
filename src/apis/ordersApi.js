@@ -2,8 +2,10 @@ import firebase, { db } from "firebase-config";
 
 async function create(orderData) {
     try {
+        const docRef = db.collection("orders").doc();
+        orderData.id = docRef.id;
         orderData.createdDate = firebase.firestore.FieldValue.serverTimestamp();
-        const response = await db.collection("orders").add(orderData);
+        const response = await docRef.set(orderData);
 
         return response;
     } catch (error) {
@@ -37,7 +39,6 @@ async function remove(orderId) {
 
 async function update(orderData) {
     try {
-        console.log('saga', orderData);
         const id = orderData.id;
         delete orderData.id;
         orderData.updatedDate = firebase.firestore.FieldValue.serverTimestamp();
@@ -49,11 +50,29 @@ async function update(orderData) {
     }
 }
 
+async function getAll() {
+    try {
+        const querySnapshot = await db.collection("orders").orderBy("createdDate", "desc").get();
+        let data = [];
+        querySnapshot.forEach((documentSnapshot) => {
+            data.push({
+                id: documentSnapshot.id,
+                ...documentSnapshot.data(),
+            });
+        });
+        console.log('data', data);
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
 const ordersApi = {
     create,
     getUserOrders,
     remove,
-    update
+    update,
+    getAll
 };
 
 export default ordersApi;

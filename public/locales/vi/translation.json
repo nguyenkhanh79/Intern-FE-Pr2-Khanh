@@ -171,5 +171,10 @@
     "remove order": "Bạn có chắn chắn muốn hủy đơn hàng này không?",
     "remove order success": "Xóa đơn hàng thành công",
     "cancel order success": "Hủy đơn hàng thành công",
-    "orders empty": "Bạn chưa có đơn hàng nào"
+    "orders empty": "Bạn chưa có đơn hàng nào",
+    "orders": "Đơn hàng",
+    "orders manage": "Quản lý đơn hàng",
+    "customer": "Khách hàng",
+    "detail": "Chi tiết",
+    "product quantity": "Số lượng SP"
 }

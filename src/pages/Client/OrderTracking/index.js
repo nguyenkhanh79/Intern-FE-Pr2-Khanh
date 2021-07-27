@@ -57,29 +57,21 @@ function OrderTracking() {
             <h3 className="order-tracking__title">{t("order tracking")}</h3>
             <div className="order-tracking__content">
                 {ordersData.length <= 0 ? (
-                    <div className="order-empty">{t("orders empty")}</div>
+                    <div className="order-empty">
+                        {t("orders empty")}
+                    </div>
                 ) : (
                     <Tabs defaultActiveKey="1" size="large" style={{ marginBottom: 32 }}>
                         <TabPane tab={t("all")} key="1">
                             {ordersData.map((item) => {
-                                return (
-                                    <OrderBlock
-                                        data={item}
-                                        onCancel={handleOnCancelOrder}
-                                        key={item.id}
-                                    />
-                                );
+                                return <OrderBlock data={item} onCancel={handleOnCancelOrder} key={item.id}/>;
                             })}
                         </TabPane>
                         <TabPane tab={t("unconfirm")} key="2">
                             {ordersData.map((item) => {
                                 if (item.status === "unconfirm") {
                                     return (
-                                        <OrderBlock
-                                            data={item}
-                                            onCancel={handleOnCancelOrder}
-                                            key={item.id}
-                                        />
+                                        <OrderBlock data={item} onCancel={handleOnCancelOrder} key={item.id}/>
                                     );
                                 }
                                 return null;
@@ -89,11 +81,7 @@ function OrderTracking() {
                             {ordersData.map((item) => {
                                 if (item.status === "delivering") {
                                     return (
-                                        <OrderBlock
-                                            data={item}
-                                            onCancel={handleOnCancelOrder}
-                                            key={item.id}
-                                        />
+                                        <OrderBlock data={item} onCancel={handleOnCancelOrder} key={item.id}/>
                                     );
                                 }
                                 return null;
@@ -103,11 +91,7 @@ function OrderTracking() {
                             {ordersData.map((item) => {
                                 if (item.status === "delivered") {
                                     return (
-                                        <OrderBlock
-                                            data={item}
-                                            onCancel={handleOnCancelOrder}
-                                            key={item.id}
-                                        />
+                                        <OrderBlock data={item} onCancel={handleOnCancelOrder} key={item.id}/>
                                     );
                                 }
                                 return null;
@@ -117,11 +101,7 @@ function OrderTracking() {
                             {ordersData.map((item) => {
                                 if (item.status === "cancelled") {
                                     return (
-                                        <OrderBlock
-                                            data={item}
-                                            onCancel={handleOnCancelOrder}
-                                            key={item.id}
-                                        />
+                                        <OrderBlock data={item} onCancel={handleOnCancelOrder} key={item.id}/>
                                     );
                                 }
                                 return null;

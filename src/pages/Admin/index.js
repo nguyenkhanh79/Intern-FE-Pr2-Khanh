@@ -11,6 +11,7 @@ import { Route, Switch } from "react-router-dom";
 import {
     ADMIN_CATEGOIES_PATH,
     ADMIN_MANAGE_PRODUCTS_PATH,
+    ADMIN_ORDERS_PATH,
     ADMIN_PATH,
     ADMIN_PRODUCTS_PATH,
     ADMIN_USERS_PATH,
@@ -19,6 +20,8 @@ import ProductManage from "./AdminProducts/ProductManage";
 import AdminDashboard from "./AdminDashboard";
 import AdminCategories from "./AdminCategories";
 import AdminUsers from "./AdminUsers";
+import AdminOrders from "./AdminOrders";
+import OrderDetail from "./AdminOrders/OrderDetail";
 
 function Admin() {
     const dispatch = useDispatch();
@@ -51,6 +54,12 @@ function Admin() {
                         </Route>
                         <Route path={ADMIN_USERS_PATH}>
                             <AdminUsers></AdminUsers>
+                        </Route>
+                        <Route path={ADMIN_ORDERS_PATH + "/:orderId"}>
+                            <OrderDetail></OrderDetail>
+                        </Route>
+                        <Route path={ADMIN_ORDERS_PATH}>
+                            <AdminOrders></AdminOrders>
                         </Route>
                         <Route path="*">
                             <div>404</div>

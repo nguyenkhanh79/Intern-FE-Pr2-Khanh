@@ -6,8 +6,11 @@ import {
     createOrderFail,
     createOrderSuccess,
     CREATE_ORDER_REQUEST,
+    getAllOrdersFail,
+    getAllOrdersSuccess,
     getUserOrdersFail,
     getUserOrdersSuccess,
+    GET_ALL_ORDERS_REQUEST,
     GET_USER_ORDERS_REQUEST,
     removeOrderFail,
     removeOrderSuccess,
@@ -67,11 +70,24 @@ function* updateOrder(action) {
     }
 }
 
+function* fetchAllOrders() {
+    try {
+        const fetchTask = yield spawn(ordersApi.getAll);
+        yield delay(700);
+        const response = yield join(fetchTask);
+        yield put(getAllOrdersSuccess(response));
+    } catch (error) {
+        yield put(getAllOrdersFail(error));
+    }
+}
+
+
 function* watchOrdersRequest() {
     yield takeLatest(CREATE_ORDER_REQUEST, createOrder);
     yield takeLatest(GET_USER_ORDERS_REQUEST, fetchUserOrders);
     yield takeLatest(REMOVE_ORDER_REQUEST, removeOrders);
     yield takeLatest(UPDATE_ORDER_REQUEST, updateOrder);
+    yield takeLatest(GET_ALL_ORDERS_REQUEST, fetchAllOrders);
 }
 
 export default watchOrdersRequest;
