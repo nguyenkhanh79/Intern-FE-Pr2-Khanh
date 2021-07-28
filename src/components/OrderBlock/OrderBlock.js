@@ -47,7 +47,7 @@ function OrderBlock({ data, onCancel }) {
                         </p>
                         <div className="order-bill-total">
                             <span className="field-title">{t("bill")}: </span>
-                            <span>{formatMoney(data.order.totalPrice)} đ</span>
+                            <span>{formatMoney(data.order.totalPrice + data.shippingFee + (data.order.totalPrice * data.tax) / 100)} đ</span>
                         </div>
                     </div>                   
                 </div>
@@ -91,7 +91,7 @@ function OrderBlock({ data, onCancel }) {
                         <span className="status-text">{t(data.status)}</span>
                     </Tag>
                 </p>
-                {data.status === "unconfirm" && <button className="btn" onClick={()=>onCancel(data.id)}>{t("cancel")}</button>}
+                {data.status === "unconfirm" && onCancel && <button className="btn" onClick={()=>onCancel(data.id)}>{t("cancel")}</button>}
             </div>
         </div>
     );

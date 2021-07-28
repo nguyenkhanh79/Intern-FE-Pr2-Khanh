@@ -173,5 +173,11 @@
     "orders manage": "Orders manage",
     "customer": "Customer",
     "detail": "Detail",
-    "product quantity": "Product quantity"
+    "product quantity": "Product quantity",    
+    "user order empty": "Order empty",
+    "orders detail": "Order detail",
+    "status change": "Status change",
+    "update order success": "Update order success",
+    "update order fail": "Update order fail",
+    "result length": "Result"
 }

@@ -145,8 +145,8 @@ function AdminOrders() {
 
     function handleOnSearchChange(e) {
         e.preventDefault();
-        const {value} = e.target
-        if(!value) {
+        const { value } = e.target;
+        if (!value) {
             setOrderFilter((state) => {
                 return {
                     status: {
@@ -189,7 +189,12 @@ function AdminOrders() {
             <div className="admin-section__content">
                 <div className="content-filter">
                     <div className="search-filter">
-                        <Search placeholder={t("search")} onChange={handleOnSearchChange} onSearch={handleOnSearch} enterButton />
+                        <Search
+                            placeholder={t("search")}
+                            onChange={handleOnSearchChange}
+                            onSearch={handleOnSearch}
+                            enterButton
+                        />
                     </div>
                     <div className="categories-filter">
                         <span>{t("order status")}</span>

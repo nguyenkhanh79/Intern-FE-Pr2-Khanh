@@ -51,6 +51,7 @@ function ProductsShow({reset}) {
                     <button className="reset-btn btn" onClick={handleOnResetFilter}>
                         {t("reset filter")}
                     </button>
+                    <span>{t("result length")}: {data.length}</span>
                 </div>
                 <div className="header-right">
                     <p className="sort-text">{t("sort by")}</p>

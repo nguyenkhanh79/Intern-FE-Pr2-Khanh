@@ -176,5 +176,17 @@
     "orders manage": "Quản lý đơn hàng",
     "customer": "Khách hàng",
     "detail": "Chi tiết",
-    "product quantity": "Số lượng SP"
+    "product quantity": "Số lượng SP",
+    "user order empty": "Không có đơn hàng nào ở đây",
+    "orders detail": "Chi tiết đơn hàng",
+    "status change": "Thay đổi trạng thái",
+    "update order success": "Cập nhật đơn hàng thành công",
+    "update order fail": "Cập nhật đơn hàng thất bại",    
+    "result length": "Số sản phẩm tìm thấy",
+    "Meat": "Thịt",
+    "Fruit": "Hoa quả",
+    "Vegetable": "Rau củ",
+    "Bread": "Bánh mì",
+    "Canned food": "Đồ hộp",
+    "Other food": "Thực phẩm khác"
 }

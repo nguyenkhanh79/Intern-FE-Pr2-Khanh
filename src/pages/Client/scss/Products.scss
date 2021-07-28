@@ -163,6 +163,20 @@
             @include flex-row(space-between);
             margin-bottom: 1rem;
 
+            .header-left {
+                @include flex-row;
+                
+                button {
+                    margin-right: 1rem;
+                }
+
+                span {
+                    font-size: 1.4rem;
+                    font-weight: bold;
+                    color: $black2;
+                }
+            }
+
             .reset-btn {
                 font-size: 1.4rem;
                 font-weight: 500

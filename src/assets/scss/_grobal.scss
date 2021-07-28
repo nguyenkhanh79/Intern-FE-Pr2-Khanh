@@ -145,22 +145,22 @@ body {
     &:focus-within {
         border: 3px solid $green1;
     }
-}
-.ant-select-selector {
-    border: none !important;
-    box-shadow: none !important;
-    font-size: 1.6rem;
-    color: $black2;
 
-    .ant-select-selection-search-input {
-        border-radius: 0 !important;
+    .ant-select-selector {
+        border: none !important;
+        box-shadow: none !important;
+        font-size: 1.6rem;
+        color: $black2;
+
+        .ant-select-selection-search-input {
+            border-radius: 0 !important;
+        }
+    }
+
+    .ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+        background-color: $gray2 !important;
     }
 }
-
-.ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    background-color: $gray2 !important;
-}
-
 .auth-main {
     .logo {
         font-size: 6rem;
@@ -222,4 +222,21 @@ body {
     font-size: 2rem;
     color: $green1;
     font-weight: bold;
+}
+
+.link-btn {
+    display: inline-block;
+    font-size: 2rem;
+    padding: 1rem 5rem;
+    color: $white1;
+    font-weight: 500;
+    border-radius: .5rem;
+    background-color: $orange1;
+    border: 3px solid $orange1;
+    transition: .3s;
+
+    &:hover {
+        background-color: $white1;
+        color: $orange1;
+    }
 }

@@ -65,8 +65,10 @@ function* updateOrder(action) {
         yield delay(700);
         yield join(updateTask);
         yield put(updateOrderSuccess())
+        toast.success(i18n.t("update order success"));
     } catch (error) {
         yield put(updateOrderFail(error))
+        toast.error(i18n.t("update order fail"));
     }
 }
 

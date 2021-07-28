@@ -1,7 +1,5 @@
 @import "assets/scss/common";
 
-
-
 .orders-content {
     @include flex-column(space-between, stretch);
     margin-top: 2rem;
@@ -18,5 +16,13 @@
 
     &__pagination {
         @include flex-row;
+    }
+}
+
+.status-change {
+    span:first-child {
+        font-size: 1.8rem;
+        color: $black2;
+        font-weight: bold;
     }
 }

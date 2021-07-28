@@ -8,21 +8,28 @@ function usePagination(dataName, initPageSize) {
         page: 1,
         pageSize: initPageSize,
     });
+    const [totalData, setTotalData] = useState([]);
 
     useEffect(() => {
         const { page, pageSize } = paginationParam;
         const start = (page - 1) * pageSize;
         const end = start + pageSize;
-        setCurrentData(data?.slice(start, end));
-    }, [paginationParam, data]);
+        if (totalData.length > 0) {
+            setCurrentData(totalData?.slice(start, end));
+            console.log("he");
+        } else {
+            setCurrentData(data?.slice(start, end));
+        }
+    }, [paginationParam, data, totalData]);
 
     return {
         currentData,
         currentPage: paginationParam.page,
-        totalPage: data.length,
+        totalPage: totalData.length > 0 ? totalData.length : data.length,
         setPaginationParam,
         setCurrentData,
         pageSize: paginationParam.pageSize,
+        setTotalData,
     };
 }
 
